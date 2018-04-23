@@ -1,0 +1,11 @@
+.footer-text{
+  text-align: center;
+}
+footer{
+  height: 45px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  box-sizing: border-box;
+  background: aqua;
+}

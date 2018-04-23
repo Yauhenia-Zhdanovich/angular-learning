@@ -1,0 +1,17 @@
+.component-border{
+  border: 1px solid #aaa;
+  border-radius: 2px;
+  display: flex;
+  justify-content: space-between;
+}
+.logo-image{
+  width:100px;
+  height:auto;
+}
+.logo-wrapper{
+  display:flex;
+  align-items: flex-start;
+}
+.logo-text{
+  align-self: center;
+}

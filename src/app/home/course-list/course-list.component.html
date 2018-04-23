@@ -1,0 +1,3 @@
+<ul>
+  <app-course-item *ngFor="let course of coursesList" [course]="course" (itemDeleted)="deletedId = $event;onDelete($event)"></app-course-item>
+</ul>

@@ -1,0 +1,23 @@
+<li class='course-list-item'>
+  <article>
+    <div class="course-info-section">
+      <div>
+        <h3>
+          {{course.title}}
+        </h3>
+        {{course.id}}
+        {{course.duration}} min
+      </div>
+      <time class="course-date">
+        {{course.creatingDate}}
+      </time>
+    </div>
+    <div>
+      {{course.description}}
+    </div>
+  </article>
+  <div class='course-button-group'>
+    <button>Edit</button>
+    <button (click)="onDelete(course.id)">Delete</button>
+  </div>
+</li>
