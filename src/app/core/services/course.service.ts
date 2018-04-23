@@ -5,7 +5,45 @@ import { CourseItem } from '../../home/course-list/course-interface';
 @Injectable()
 
 export class CourseService {
-  public getContacts (): Array<CourseItem> {
+  public getCourses (): Array<CourseItem> {
     return COURSELIST;
+  }
+
+  public removeItem (id: number): void {
+    const index: number = COURSELIST.findIndex((element) => {
+      return element.id === id;
+    }
+    ) ;
+    COURSELIST.splice(index, 1);
+  }
+
+  public createCourse(
+    id: number,
+    title: string,
+    creatingDate: string,
+    duration: number,
+    description: string
+  ): void {
+    const newItem: CourseItem = {id, title, creatingDate, duration, description};
+    COURSELIST.push(newItem);
+  }
+
+  public getItemById(id: number): CourseItem {
+    const index: number = COURSELIST.findIndex((element) => {
+        return element.id === id;
+      }
+    ) ;
+    return COURSELIST[index];
+  }
+
+  public updateItem(
+    id: number,
+    title: string,
+    creatingDate: string,
+    duration: number,
+    description: string
+  ): void {
+    const newItem: CourseItem = {id, title, creatingDate, duration, description};
+    COURSELIST.splice(id, 1, newItem);
   }
 }

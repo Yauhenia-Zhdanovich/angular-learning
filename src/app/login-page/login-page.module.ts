@@ -1,26 +1,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HomeComponent } from './home.component';
+import { LoginPageComponent } from './login-page.component';
 import { HeaderModule } from '../shared/header';
 import { FooterModule } from '../shared/footer';
-import { CourseListModule } from './course-list';
-import { ToolboxModule } from './toolbox/toolbox.module';
+import { LoginSectionModule} from './login-section';
 
 @NgModule({
   imports: [
     CommonModule,
     HeaderModule,
     FooterModule,
-    CourseListModule,
-    ToolboxModule
+    LoginSectionModule
   ],
   declarations: [
-    HomeComponent
+    LoginPageComponent
   ],
   exports: [
-    HomeComponent
-  ],
+    LoginPageComponent
+  ]
 })
 
-export class HomeComponentModule {
+export class LoginPageModule {
 }
