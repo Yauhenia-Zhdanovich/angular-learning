@@ -13,10 +13,8 @@
 /*}**/
 .login-section{
   width:50%;
-  background: yellowgreen;
   margin: 0 auto;
 }
 .login-section__label{
   display: block;
-  padding:2rem;
 }

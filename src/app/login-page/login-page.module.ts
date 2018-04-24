@@ -10,7 +10,7 @@ import { LoginSectionModule} from './login-section';
     CommonModule,
     HeaderModule,
     FooterModule,
-    LoginSectionModule
+    LoginSectionModule,
   ],
   declarations: [
     LoginPageComponent

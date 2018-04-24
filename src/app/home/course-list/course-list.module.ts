@@ -1,19 +1,24 @@
+import {MatDialogModule} from '@angular/material';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CourseListComponent } from './course-list.component';
 import { CourseItemModule} from '../course-item/course-item.module';
+import { OnDeleteDialogComponent } from './on-delete/on-delete-dialog.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    CourseItemModule
+    CourseItemModule,
+    MatDialogModule
   ],
   declarations: [
-    CourseListComponent
+    CourseListComponent,
+    OnDeleteDialogComponent
   ],
   exports: [
-    CourseListComponent
+    CourseListComponent,
   ],
+  entryComponents: [OnDeleteDialogComponent]
 })
 
 export class CourseListModule {

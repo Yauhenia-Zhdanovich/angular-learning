@@ -5,6 +5,10 @@ import { CourseItem } from '../../home/course-list/course-interface';
 @Injectable()
 
 export class CourseService {
+  public state: string;
+  constructor () {
+    this.state = 'authorization';
+  }
   public getCourses (): Array<CourseItem> {
     return COURSELIST;
   }
@@ -16,15 +20,23 @@ export class CourseService {
     ) ;
     COURSELIST.splice(index, 1);
   }
-
+  // TODO add type definition
   public createCourse(
-    id: number,
-    title: string,
-    creatingDate: string,
-    duration: number,
-    description: string
+    {
+      id,
+      title,
+      creatingDate,
+      duration,
+      description
+    }
   ): void {
-    const newItem: CourseItem = {id, title, creatingDate, duration, description};
+    const newItem: CourseItem = {
+      id,
+      title,
+      creatingDate,
+      duration,
+      description
+    };
     COURSELIST.push(newItem);
   }
 

@@ -1,12 +1,17 @@
 <section class="login-section">
   <label for="login" class="login-section__label">
     Login
-    <input type="text" id="login">
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="" value="" id="login">
+    </mat-form-field>
   </label>
   <label for="password" class="login-section__label">
-    Password
-    <input type="password" id="password">
+      Password
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="" value="" type="password" id="password">
+    </mat-form-field>
   </label>
-  <button>Enter</button>
+
+  <button mat-raised-button>Enter</button>
 </section>
 
