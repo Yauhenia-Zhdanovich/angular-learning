@@ -1,18 +1,18 @@
-import { Component, OnInit } from "@angular/core";
-import { MatDialog } from "@angular/material";
-import { CourseItem } from "./course-interface";
-import { CourseService } from "../../core/services/course.service";
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
+import { CourseItem } from './course-interface';
+import { CourseService } from '../../core/services/course.service';
 
 @Component({
-  selector: "on-delete-dialog",
-  templateUrl: "./on-delete-dialog.html"
+  selector: 'on-delete-dialog',
+  templateUrl: './on-delete-dialog.html'
 })
 class OnDeleteDialogComponent {}
 
 @Component({
-  selector: "app-course-list",
-  templateUrl: "./course-list.component.html",
-  styleUrls: ["./course-list.component.css"],
+  selector: 'app-course-list',
+  templateUrl: './course-list.component.html',
+  styleUrls: ['./course-list.component.css'],
   providers: [CourseService]
 })
 export class CourseListComponent implements OnInit {
@@ -22,13 +22,13 @@ export class CourseListComponent implements OnInit {
     private _courseService: CourseService,
     public dialog: MatDialog
   ) {}
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.getCourses();
   }
-  public onDelete(id: number): void {
+  public onDelete(): void {
     const dialogRef = this.dialog.open(OnDeleteDialogComponent, {
-      height: "350px",
-      width: "350px"
+      height: '350px',
+      width: '350px'
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);

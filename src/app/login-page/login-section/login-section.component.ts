@@ -1,11 +1,11 @@
-import { Component, OnInit } from "@angular/core";
-import { AuthService } from "../../core/services/authenticity.service";
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../core/services/authenticity.service';
 
 @Component({
-  selector: "login-section",
-  templateUrl: "./login-section.component.html",
-  styleUrls: ["./login-section.component.css"],
-  providers: [AuthService]
+  selector: 'login-section',
+  templateUrl: './login-section.component.html',
+  styleUrls: ['./login-section.component.css'],
+  providers: [ AuthService ]
 })
 export class LoginSectionComponent implements OnInit {
   public currentLogin: string;
@@ -13,12 +13,12 @@ export class LoginSectionComponent implements OnInit {
 
   constructor(private authService: AuthService) {}
 
-  ngOnInit() {
+  public ngOnInit(): void {
     let isAuthen = this.authService.isAuth();
-    console.log(isAuthen);
   }
-
-  public logName(): void {
-    console.log(this.currentLogin, this.currentPassword);
+  public logIn(): void {
+    let cred = {login: this.currentLogin, password: this.currentPassword}
+    this.authService.logIn(cred);
+    console.log(cred);
   }
 }
