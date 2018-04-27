@@ -1,28 +1,28 @@
 import { Injectable } from '@angular/core';
-import {
-  loadCredentials,
-  storeCredentials,
-  wipeCredentials,
-} from './local-storage';
+import { LocalStorageService } from './local-storage.service';
 import { Credentials } from './credentials';
 
 @Injectable()
 export class AuthService {
+  private localStorageService: LocalStorageService;
+  constructor(localStorageService: LocalStorageService) {
+    this.localStorageService = localStorageService;
+  }
   public isAuth(): boolean {
-    let credentials: Credentials = loadCredentials();
+    let credentials: Credentials = this.localStorageService.loadCredentials();
     if (!!credentials) {
       return true;
     }
     return false;
   }
-  public logIn ({login, password}): void {
-    storeCredentials({login, password });
+  public logIn (cred: Credentials): void {
+    this.localStorageService.storeCredentials(cred);
   }
   public logOut (): void {
-    wipeCredentials();
+    this.localStorageService.wipeCredentials();
   }
   public getUserInfo(): string {
-    let credentials: Credentials = loadCredentials();
+    let credentials: Credentials = this.localStorageService.loadCredentials();
     return credentials.login;
   }
 }

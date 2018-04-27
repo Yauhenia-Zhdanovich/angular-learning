@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { AuthService } from '../../core/services/authenticity.service';
 
 @Component({
@@ -8,10 +9,14 @@ import { AuthService } from '../../core/services/authenticity.service';
   inputs: ['state:passedState'],
   providers: [ AuthService ]
 })
+
 export class HeaderComponent implements OnInit {
   public state: string;
   public isAuthorized: boolean;
-  constructor(private authService: AuthService) {}
+  public authService: AuthService;
+  constructor(authService: AuthService) {
+    this.authService = authService;
+  }
    public ngOnInit(): void {
      this.isAuthorized = this.authService.isAuth();
      console.log(this.state);

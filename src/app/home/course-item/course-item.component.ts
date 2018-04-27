@@ -17,7 +17,8 @@ export class CourseItemComponent {
   // TODO solve any type problem
   @Output()
   public itemDeleted: any = new EventEmitter<number>();
-  public onDelete (id: number): void {
+
+  public onDelete(id: number): void {
     this.itemDeleted.emit(id);
   }
 }

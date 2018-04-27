@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { COURSELIST } from '../../assets/mock-courses';
-import { CourseItem } from '../../home/course-list/course-interface';
+import { COURSELIST } from '../../shared/mocks/mock-courses';
+import { CourseItem } from '../../shared/interfaces/course-interface';
 
 @Injectable()
 
@@ -20,24 +20,8 @@ export class CourseService {
     ) ;
     COURSELIST.splice(index, 1);
   }
-  // TODO add type definition
-  public createCourse(
-    {
-      id,
-      title,
-      creatingDate,
-      duration,
-      description
-    }
-  ): void {
-    const newItem: CourseItem = {
-      id,
-      title,
-      creatingDate,
-      duration,
-      description
-    };
-    COURSELIST.push(newItem);
+  public createCourse(course: CourseItem ): void {
+    COURSELIST.push(course);
   }
 
   public getItemById(id: number): CourseItem {
@@ -48,14 +32,7 @@ export class CourseService {
     return COURSELIST[index];
   }
 
-  public updateItem(
-    id: number,
-    title: string,
-    creatingDate: string,
-    duration: number,
-    description: string
-  ): void {
-    const newItem: CourseItem = {id, title, creatingDate, duration, description};
-    COURSELIST.splice(id, 1, newItem);
+  public updateItem(course: CourseItem): void {
+    COURSELIST.splice(course.id, 1, course);
   }
 }

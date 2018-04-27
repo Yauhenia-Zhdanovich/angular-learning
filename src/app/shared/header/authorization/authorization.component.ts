@@ -8,8 +8,10 @@ import { AuthService } from '../../../core/services/authenticity.service';
   providers: [ AuthService ]
 })
 export class AuthorizationComponent {
-  // TODO change declarations of services
-  constructor(private authService: AuthService) {}
+  public authService: AuthService;
+  constructor(authService: AuthService) {
+    this.authService = authService;
+  }
   public logOff(): void {
     this.authService.logOut();
     console.log('user logged out');
