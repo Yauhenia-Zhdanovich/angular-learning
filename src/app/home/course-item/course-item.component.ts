@@ -14,9 +14,9 @@ import {
 export class CourseItemComponent {
   @Input()
   public course: string;
-  // TODO solve any type problem
-  @Output()
-  public itemDeleted: any = new EventEmitter<number>();
+
+   @Output()
+   public itemDeleted: EventEmitter<number> = new EventEmitter();
 
   public onDelete(id: number): void {
     this.itemDeleted.emit(id);

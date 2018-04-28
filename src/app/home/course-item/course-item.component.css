@@ -1,16 +1,23 @@
 .course-list-item{
-  border: 1px solid #aaa;
   margin-bottom: 1rem;
   padding: 0.5rem;
   display: flex;
 
 }
 .course-button-group{
-  display: flex;
   flex-direction: column;
+  display: flex;
 }
 .course-info-section{
   display: flex;
   justify-content: space-between;
   width: 100%;
+}
+.card-item{
+  margin-bottom:2rem;
+}
+.course-button{
+  width:4rem;
+  margin-bottom:1rem;
+  display: inline-block;
 }

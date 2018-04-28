@@ -8,6 +8,7 @@ import { Component } from '@angular/core';
 
 export class ToolboxComponent {
   public courseName: string;
+
   public logName (): void {
     console.log(this.courseName);
   }

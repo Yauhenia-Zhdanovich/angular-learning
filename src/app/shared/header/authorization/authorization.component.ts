@@ -9,11 +9,12 @@ import { AuthService } from '../../../core/services/authenticity.service';
 })
 export class AuthorizationComponent {
   public authService: AuthService;
+
   constructor(authService: AuthService) {
     this.authService = authService;
   }
+
   public logOff(): void {
     this.authService.logOut();
-    console.log('user logged out');
   }
 }

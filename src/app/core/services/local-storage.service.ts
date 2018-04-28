@@ -1,28 +1,30 @@
 import { Injectable } from '@angular/core';
-import { Credentials } from './credentials';
+
+import { Credentials } from '../../shared/interfaces/credentials';
 
 @Injectable()
 
 export class LocalStorageService {
-  public loadCredentials (): any {
+  public loadCredentials (): Credentials {
     try {
-      const serializedCredentials: any = localStorage.getItem('credentials');
-      if (!!serializedCredentials) {
-        return false;
+      const serializedCredentials: string = localStorage.getItem('credentials');
+      if (serializedCredentials) {
+        return JSON.parse(serializedCredentials);
       }
-      return JSON.parse(serializedCredentials);
     } catch (err) {
-      return;
+      console.log(err);
     }
   }
+
   public storeCredentials (credentials: Credentials): void {
     try {
       const serializedCredentials: string = JSON.stringify(credentials);
       localStorage.setItem('credentials', serializedCredentials);
     } catch (err) {
-      return;
+      console.log(err);
     }
   }
+
   public wipeCredentials (): void {
     localStorage.removeItem('credentials');
   }

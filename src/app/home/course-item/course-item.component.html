@@ -1,10 +1,11 @@
-<li class='course-list-item'>
-  <article>
+<mat-card class="card-item">
+  <li class='course-list-item'>
+  <section>
     <div class="course-info-section">
       <div>
-        <h3>
+        <mat-card-title>
           {{course.title}}
-        </h3>
+        </mat-card-title>
         {{course.id}}
         {{course.duration}} min
       </div>
@@ -12,12 +13,17 @@
         {{course.creatingDate}}
       </time>
     </div>
-    <div>
+    <mat-card-content>
       {{course.description}}
-    </div>
-  </article>
-  <div class='course-button-group'>
-    <button>Edit</button>
-    <button (click)="onDelete(course.id)">Delete</button>
+    </mat-card-content>
+  </section>
+  <div class="course-button-group">
+    <button mat-raised-button class="course-button">Edit</button>
+    <button mat-raised-button
+            (click)="onDelete(course.id)"
+            class="course-button">
+      Delete
+    </button>
   </div>
 </li>
+</mat-card>

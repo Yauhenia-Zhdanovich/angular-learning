@@ -11,14 +11,14 @@ import { AuthService } from '../../core/services/authenticity.service';
 })
 
 export class HeaderComponent implements OnInit {
-  public state: string;
   public isAuthorized: boolean;
   public authService: AuthService;
+
   constructor(authService: AuthService) {
     this.authService = authService;
   }
+
    public ngOnInit(): void {
      this.isAuthorized = this.authService.isAuth();
-     console.log(this.state);
   }
 }

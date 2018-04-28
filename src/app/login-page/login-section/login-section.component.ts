@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+
 import { AuthService } from '../../core/services/authenticity.service';
+import { Credentials } from '../../shared/interfaces/credentials';
 
 @Component({
   selector: 'login-section',
@@ -10,15 +12,17 @@ import { AuthService } from '../../core/services/authenticity.service';
 export class LoginSectionComponent implements OnInit {
   public currentLogin: string;
   public currentPassword: string;
+  public authService: AuthService;
 
-  constructor(private authService: AuthService) {}
+  constructor(authService: AuthService) {
+    this.authService = authService;
+  }
 
   public ngOnInit(): void {
-    let isAuthen = this.authService.isAuth();
+    // let isAuth: boolean = this.authService.isAuth();
   }
   public logIn(): void {
-    let cred = {login: this.currentLogin, password: this.currentPassword}
+    let cred: Credentials = {login: this.currentLogin, password: this.currentPassword}
     this.authService.logIn(cred);
-    console.log(cred);
   }
 }

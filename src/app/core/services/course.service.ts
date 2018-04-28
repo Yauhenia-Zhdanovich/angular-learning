@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+
 import { COURSELIST } from '../../shared/mocks/mock-courses';
 import { CourseItem } from '../../shared/interfaces/course-interface';
 
@@ -6,9 +7,11 @@ import { CourseItem } from '../../shared/interfaces/course-interface';
 
 export class CourseService {
   public state: string;
+
   constructor () {
     this.state = 'authorization';
   }
+
   public getCourses (): Array<CourseItem> {
     return COURSELIST;
   }
@@ -16,10 +19,10 @@ export class CourseService {
   public removeItem (id: number): void {
     const index: number = COURSELIST.findIndex((element) => {
       return element.id === id;
-    }
-    ) ;
+    });
     COURSELIST.splice(index, 1);
   }
+
   public createCourse(course: CourseItem ): void {
     COURSELIST.push(course);
   }
