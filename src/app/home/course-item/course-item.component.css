@@ -1,23 +1,35 @@
-.course-list-item{
+.course-list-item {
   margin-bottom: 1rem;
   padding: 0.5rem;
   display: flex;
-
+  width: 100%;
+  justify-content: space-between;
 }
-.course-button-group{
+
+.course-button-group {
   flex-direction: column;
   display: flex;
 }
-.course-info-section{
+
+.course-info-section {
   display: flex;
   justify-content: space-between;
-  width: 100%;
 }
-.card-item{
+
+.card-item {
   margin-bottom:2rem;
 }
-.course-button{
+
+.course-button {
   width:4rem;
   margin-bottom:1rem;
   display: inline-block;
+}
+
+.fas {
+  color:#F1D001;
+}
+
+.top-rated {
+  background-color: #eeeeee;
 }

@@ -4,22 +4,25 @@ export const COURSELIST: Array<CourseItem> = [
   {
     id: 1,
     title: 'Redux course',
-    creatingDate: '21.11.2012',
+    creatingDate: new Date('May 2, 2018'),
     duration: 20,
-    description: 'studying front-end development, redux'
+    description: 'studying front-end development, redux',
+    topRated: true
   },
   {
     id: 2,
     title: 'Angular course',
-    creatingDate: '11.11.2012',
-    duration: 40,
-    description: 'studying front-end development'
+    creatingDate: new Date('March 21, 2018'),
+    duration: 120,
+    description: 'studying front-end development',
+    topRated: true
   },
   {
     id: 3,
     title: 'React course',
-    creatingDate: '04.04.2012',
-    duration: 30,
-    description: 'studying front-end development'
+    creatingDate: new Date('April 29, 2018'),
+    duration: 130,
+    description: 'studying front-end development',
+    topRated: false
   }
 ];

@@ -1,10 +1,12 @@
 <div class='toolbox-wrapper'>
   <div>
+    <mat-form-field class="example-full-width">
     <label for="">
-      <input type="text"
+      <input matInput type="text"
              placeholder="name fragment or date"
              [(ngModel)]="courseName">
     </label>
+    </mat-form-field>
     <button mat-raised-button (click)="logName()">Find</button>
   </div>
   <button mat-raised-button>Add Course</button>

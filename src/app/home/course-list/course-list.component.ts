@@ -11,7 +11,7 @@ import { OnDeleteDialogComponent } from './on-delete-dialog/on-delete-dialog.com
   selector: 'app-course-list',
   templateUrl: './course-list.component.html',
   styleUrls: ['./course-list.component.css'],
-  providers: [CourseService]
+  providers: [ CourseService ]
 })
 
 export class CourseListComponent implements OnInit {
@@ -33,7 +33,6 @@ export class CourseListComponent implements OnInit {
   }
 
   public onDelete(event: number): void {
-    console.log(event);
     this.dialogRef = this.dialog.open(OnDeleteDialogComponent, {height: '350px', width: '350px'});
     this.dialogRef.afterClosed().subscribe(result => {
       if (result) {

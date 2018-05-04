@@ -1,3 +1,8 @@
-ul{
+ul {
   list-style: none;
+}
+.no-data {
+  text-align: center;
+  font-size: 1.3rem;
+  background: #dddddd;
 }

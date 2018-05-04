@@ -1,6 +1,9 @@
 <ul>
-  <app-course-item *ngFor="let course of coursesList"
+  <app-course-item *ngFor="let course of coursesList | sortByDate"
                    [course]="course"
                    (itemDeleted)="deletedId = $event;onDelete($event)">
   </app-course-item>
+  <mat-card *ngIf="!coursesList.length" class="no-data">
+    No data. Feel free to add new course
+  </mat-card>
 </ul>

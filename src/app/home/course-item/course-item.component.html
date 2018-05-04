@@ -1,16 +1,17 @@
-<mat-card class="card-item">
-  <li class='course-list-item'>
+<mat-card class="card-item" [isFresh]='isFresh' [ngClass]="{'top-rated': course.topRated}">
+  <li class='course-list-item' >
   <section>
     <div class="course-info-section">
       <div>
         <mat-card-title>
-          {{course.title}}
+          {{course.title | uppercase}}
         </mat-card-title>
-        {{course.id}}
-        {{course.duration}} min
+        Video course {{course.id}}<br/>
+        {{course.duration | transformedDuration}}
+        <i *ngIf="course.topRated" class="fas fa-star"></i>
       </div>
       <time class="course-date">
-        {{course.creatingDate}}
+        {{course.creatingDate | date}}
       </time>
     </div>
     <mat-card-content>
