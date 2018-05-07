@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  OnChanges
+} from '@angular/core';
 
 import { MatDialog } from '@angular/material';
 import { MatDialogRef } from '@angular/material';
@@ -15,6 +20,8 @@ import { OnDeleteDialogComponent } from './on-delete-dialog/on-delete-dialog.com
 })
 
 export class CourseListComponent implements OnInit {
+  @Input('searchValue')
+  public searchValue: string;
   public coursesList: Array<CourseItem>;
   public courseService: CourseService;
   public dialog: MatDialog;
@@ -30,6 +37,9 @@ export class CourseListComponent implements OnInit {
 
   public ngOnInit(): void {
     this.getCourses();
+  }
+  public ngOnChanges(): void {
+    console.log(this.searchValue, 'from course list');
   }
 
   public onDelete(event: number): void {

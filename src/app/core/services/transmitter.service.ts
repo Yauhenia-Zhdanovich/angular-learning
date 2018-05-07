@@ -6,6 +6,5 @@ export class TransmitterService {
 
   public getValue(value: string): void {
     this.searchValue = value;
-    console.log(this.searchValue);
   }
 }

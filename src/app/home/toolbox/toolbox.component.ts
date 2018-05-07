@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import {
+  Component,
+  Output,
+  EventEmitter
+} from '@angular/core';
 import { TransmitterService } from '../../core/services/transmitter.service';
 
 @Component({
@@ -9,6 +13,9 @@ import { TransmitterService } from '../../core/services/transmitter.service';
 })
 
 export class ToolboxComponent {
+  @Output()
+  public searchValue: EventEmitter<string> = new EventEmitter();
+
   public courseName: string;
   public transmitterService: TransmitterService;
 
@@ -18,5 +25,6 @@ export class ToolboxComponent {
 
   public logName (): void {
     this.transmitterService.getValue(this.courseName);
+    this.searchValue.emit(this.courseName);
   }
 }

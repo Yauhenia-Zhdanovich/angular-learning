@@ -7,4 +7,12 @@ import { Component } from '@angular/core';
 })
 
 export class HomeComponent {
+  public searchValue: string;
+
+  constructor() {}
+
+  public onSearch(searchName: string): void {
+    this.searchValue = searchName;
+    // console.log(searchName);
+  }
 }
