@@ -17,30 +17,39 @@ import { CourseSearchPipe } from '../../core/pipes/course-search.pipe';
   selector: 'app-course-list',
   templateUrl: './course-list.component.html',
   styleUrls: ['./course-list.component.css'],
-  providers: [ CourseService ]
+  providers: [
+    CourseService,
+    CourseSearchPipe,
+  ]
 })
 
-export class CourseListComponent implements OnInit {
+export class CourseListComponent implements OnInit, OnChanges {
   @Input('searchValue')
   public searchValue: string;
-  public coursesList: Array<CourseItem>;
-  public courseService: CourseService;
+  public coursesList: Array<CourseItem> = [];
+  public filteredList: Array<CourseItem> = [];
   public dialog: MatDialog;
   public dialogRef: MatDialogRef<OnDeleteDialogComponent>;
+  public courseSearchPipe: CourseSearchPipe;
+  public courseService: CourseService;
 
   constructor(
     courseService: CourseService,
     dialog: MatDialog,
+    courseSearchPipe: CourseSearchPipe
   ) {
     this.courseService = courseService;
+    this.courseSearchPipe = courseSearchPipe;
     this.dialog = dialog;
+    this.filteredList = [];
   }
 
   public ngOnInit(): void {
     this.getCourses();
   }
   public ngOnChanges(): void {
-    console.log(this.searchValue, 'from course list');
+    this.filteredList = this.courseSearchPipe.transform(this.coursesList, this.searchValue);
+    console.log(this.filteredList);
   }
 
   public onDelete(event: number): void {

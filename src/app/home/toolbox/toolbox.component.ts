@@ -21,6 +21,8 @@ export class ToolboxComponent {
 
   constructor(transmitterService: TransmitterService) {
     this.transmitterService = transmitterService;
+    this.courseName = '';
+    this.searchValue.emit(this.courseName);
   }
 
   public logName (): void {
