@@ -11,6 +11,7 @@ import { MatDialogRef } from '@angular/material';
 import { CourseItem } from '../../shared/interfaces/course-interface';
 import { CourseService } from '../../core/services/course.service';
 import { OnDeleteDialogComponent } from './on-delete-dialog/on-delete-dialog.component';
+import { CourseSearchPipe } from '../../core/pipes/course-search.pipe';
 
 @Component({
   selector: 'app-course-list',

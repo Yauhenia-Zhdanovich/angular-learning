@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { COURSELIST } from '../../shared/mocks/mock-courses';
 import { CourseItem } from '../../shared/interfaces/course-interface';
+// import { Observable } from  './'
 
 @Injectable()
 
@@ -14,6 +15,8 @@ export class CourseService {
 
   public getCourses (): Array<CourseItem> {
     return COURSELIST;
+    // Observable.of(COURSELIST)
+    // .map()
   }
 
   public removeItem (id: number): void {

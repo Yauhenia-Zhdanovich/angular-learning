@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { HomeComponentModule } from './home';
 import { LoginPageModule } from './login-page';
 import { LocalStorageService } from './core/services/local-storage.service';
+import { AddCoursePageModule } from './add-course-page';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { LocalStorageService } from './core/services/local-storage.service';
     FormsModule,
     HomeComponentModule,
     LoginPageModule,
+    AddCoursePageModule,
     BrowserAnimationsModule,
   ],
   providers: [ LocalStorageService ],
