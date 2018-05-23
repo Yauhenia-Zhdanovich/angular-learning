@@ -1,0 +1,20 @@
+.form-main {
+  margin: 0 auto;
+  width: 30rem;
+  background: #ddd;
+}
+
+.form-group {
+  display: flex;
+  width: 100%;
+}
+
+.form-label {
+  align-self: center;
+  margin-right: 2rem;
+  text-align: right;
+}
+
+.input-item {
+  width: 100%;
+}

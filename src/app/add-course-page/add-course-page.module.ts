@@ -8,12 +8,13 @@ import { AddCourseFormModule } from './add-course-form';
   imports: [
     CommonModule,
     HeaderModule,
+    AddCourseFormModule,
   ],
   declarations: [
     AddCoursePageComponent
   ],
   exports: [
-    AddCoursePageComponent
+    AddCoursePageComponent,
   ]
 })
 

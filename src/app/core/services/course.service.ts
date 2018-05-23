@@ -2,21 +2,31 @@ import { Injectable } from '@angular/core';
 
 import { COURSELIST } from '../../shared/mocks/mock-courses';
 import { CourseItem } from '../../shared/interfaces/course-interface';
-// import { Observable } from  './'
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/observable/from';
+import 'rxjs/add/operator/filter';
 
 @Injectable()
 
 export class CourseService {
+  private twoWeeks: number = 86400000 * 14;
   public state: string;
 
   constructor () {
     this.state = 'authorization';
   }
 
-  public getCourses (): Array<CourseItem> {
-    return COURSELIST;
-    // Observable.of(COURSELIST)
-    // .map()
+  public getCourses (): any {
+    return Observable.from(COURSELIST)
+      .filter(element => {
+        const today: number = Date.now();
+        const difference: number = today - Date.parse(element.creatingDate.toString());
+        if (difference < this.twoWeeks) {
+          return element;
+        }
+      });
+
   }
 
   public removeItem (id: number): void {

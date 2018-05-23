@@ -8,9 +8,8 @@ export class CourseSearchPipe implements PipeTransform {
     if (!list) {
       return;
     }
-    console.log(searchValue);
-    let filteredList: Array<CourseItem> = list.filter( el => {
-      if (el.title.search(new RegExp(searchValue.trim(), 'i')) !== -1) {
+    let filteredList: Array<CourseItem> = list.filter( element => {
+      if (element.title.search(new RegExp(searchValue.trim(), 'i')) !== -1) {
         return true;
       }
     });

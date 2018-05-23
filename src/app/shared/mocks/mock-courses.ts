@@ -4,7 +4,7 @@ export const COURSELIST: Array<CourseItem> = [
   {
     id: 1,
     title: 'Redux course',
-    creatingDate: new Date('May 2, 2018'),
+    creatingDate: new Date('May 22, 2018'),
     duration: 20,
     description: 'studying front-end development, redux',
     topRated: true
@@ -12,7 +12,7 @@ export const COURSELIST: Array<CourseItem> = [
   {
     id: 2,
     title: 'Angular course',
-    creatingDate: new Date('March 21, 2018'),
+    creatingDate: new Date('May 18, 2018'),
     duration: 120,
     description: 'studying front-end development',
     topRated: true

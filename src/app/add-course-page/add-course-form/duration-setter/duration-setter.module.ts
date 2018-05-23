@@ -1,26 +1,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AddCourseFormComponent } from './add-course-form.component';
+import { DurationSetterComponent } from './duration-setter.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
-import { DatePickerModule } from './date-picker';
-import { DurationSetterModule } from './duration-setter';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
     MatButtonModule,
     MatInputModule,
-    DatePickerModule,
-    DurationSetterModule
+    FormsModule
   ],
   declarations: [
-    AddCourseFormComponent
+    DurationSetterComponent
   ],
   exports: [
-    AddCourseFormComponent,
+    DurationSetterComponent
   ]
 })
 
-export class AddCourseFormModule {
+export class DurationSetterModule {
 }

@@ -8,7 +8,7 @@
   <ng-container *ngIf="searchValue">
     <app-course-item *ngFor="let course of filteredList | sortByDate"
                      [course]="course"
-                     (itemDeleted)="deletedId = $event;onDelete($event)">
+                     (itemDeleted)="onDelete($event)">
     </app-course-item>
   </ng-container>
   <mat-card *ngIf="!coursesList.length" class="no-data">

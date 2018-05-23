@@ -2,7 +2,8 @@ import {
   Component,
   OnInit,
   Input,
-  OnChanges
+  OnChanges,
+  OnDestroy
 } from '@angular/core';
 
 import { MatDialog } from '@angular/material';
@@ -23,7 +24,7 @@ import { CourseSearchPipe } from '../../core/pipes/course-search.pipe';
   ]
 })
 
-export class CourseListComponent implements OnInit, OnChanges {
+export class CourseListComponent implements OnInit, OnChanges, OnDestroy {
   @Input('searchValue')
   public searchValue: string;
   public coursesList: Array<CourseItem> = [];
@@ -32,6 +33,7 @@ export class CourseListComponent implements OnInit, OnChanges {
   public dialogRef: MatDialogRef<OnDeleteDialogComponent>;
   public courseSearchPipe: CourseSearchPipe;
   public courseService: CourseService;
+  public sub;
 
   constructor(
     courseService: CourseService,
@@ -49,7 +51,10 @@ export class CourseListComponent implements OnInit, OnChanges {
   }
   public ngOnChanges(): void {
     this.filteredList = this.courseSearchPipe.transform(this.coursesList, this.searchValue);
-    console.log(this.filteredList);
+  }
+
+  public ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 
   public onDelete(event: number): void {
@@ -62,6 +67,10 @@ export class CourseListComponent implements OnInit, OnChanges {
   }
 
   public getCourses(): void {
-    this.coursesList = this.courseService.getCourses();
+    const myObs: {} = {
+      next: x => this.coursesList.push(x),
+    };
+    this.sub = this.courseService.getCourses().subscribe(myObs);
+    console.log(this.coursesList);
   }
 }
