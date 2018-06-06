@@ -33,7 +33,7 @@ export class CourseListComponent implements OnInit, OnChanges, OnDestroy {
   public dialogRef: MatDialogRef<OnDeleteDialogComponent>;
   public courseSearchPipe: CourseSearchPipe;
   public courseService: CourseService;
-  public sub;
+  public courseSubscriber: any;
 
   constructor(
     courseService: CourseService,
@@ -54,7 +54,7 @@ export class CourseListComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this.sub.unsubscribe();
+    this.courseSubscriber.unsubscribe();
   }
 
   public onDelete(event: number): void {
@@ -67,10 +67,7 @@ export class CourseListComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   public getCourses(): void {
-    const myObs: {} = {
-      next: x => this.coursesList.push(x),
-    };
-    this.sub = this.courseService.getCourses().subscribe(myObs);
+    this.courseSubscriber = this.courseService.getCourses().subscribe(x => this.coursesList.push(x));
     console.log(this.coursesList);
   }
 }

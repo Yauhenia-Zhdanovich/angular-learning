@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/from';
 import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 
@@ -19,12 +20,20 @@ export class CourseService {
 
   public getCourses (): any {
     return Observable.from(COURSELIST)
+      .map(element => {
+        return {
+          id: element.id,
+          title: element.title,
+          creatingDate: element.creatingDate,
+          duration: element.duration,
+          description: element.description,
+          topRated: element.topRated
+        };
+      })
       .filter(element => {
         const today: number = Date.now();
         const difference: number = today - Date.parse(element.creatingDate.toString());
-        if (difference < this.twoWeeks) {
-          return element;
-        }
+        return (difference < this.twoWeeks);
       });
 
   }
