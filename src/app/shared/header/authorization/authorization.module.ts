@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {  AuthorizationComponent } from './authorization.component';
+import { AuthorizationComponent } from './authorization.component';
+import { AuthService } from '../../../core/services/authenticity.service';
 
 @NgModule({
   imports: [
@@ -12,6 +13,9 @@ import {  AuthorizationComponent } from './authorization.component';
   exports: [
     AuthorizationComponent
   ],
+  providers: [
+    AuthService
+  ]
 })
 
 export class AuthorizationComponentModule {

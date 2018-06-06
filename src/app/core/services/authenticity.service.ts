@@ -2,28 +2,30 @@ import { Injectable } from '@angular/core';
 
 import { LocalStorageService } from './local-storage.service';
 import { Credentials } from '../../shared/interfaces/credentials';
+import { Subject } from 'rxjs/Subject';
+import { ReplaySubject } from 'rxjs';
 
 @Injectable()
 export class AuthService {
   private localStorageService: LocalStorageService;
-
+  public isAuthenticatedSubject: ReplaySubject<Credentials> = new ReplaySubject();
+  
   constructor(localStorageService: LocalStorageService) {
     this.localStorageService = localStorageService;
   }
 
   public isAuth(): boolean {
     let credentials: Credentials = this.localStorageService.loadCredentials();
-    if (credentials) {
-      return true;
-    }
-    return false;
+    return !!credentials;
   }
 
   public logIn (cred: Credentials): void {
+    this.isAuthenticatedSubject.next(cred);
     this.localStorageService.storeCredentials(cred);
   }
 
   public logOut (): void {
+    this.isAuthenticatedSubject.next({login: '', password: ''});
     this.localStorageService.wipeCredentials();
   }
 

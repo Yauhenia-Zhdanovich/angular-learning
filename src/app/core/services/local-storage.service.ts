@@ -9,6 +9,7 @@ export class LocalStorageService {
     try {
       const serializedCredentials: string = localStorage.getItem('credentials');
       if (serializedCredentials) {
+        console.log(serializedCredentials);
         return JSON.parse(serializedCredentials);
       }
     } catch (err) {

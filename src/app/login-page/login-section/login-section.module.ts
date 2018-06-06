@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../core/services/authenticity.service';
 
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -20,6 +21,9 @@ import { FormsModule } from '@angular/forms';
   exports: [
     LoginSectionComponent
   ],
+  providers: [
+    AuthService
+  ]
 })
 
 export class LoginSectionModule {

@@ -10,7 +10,7 @@ import { AuthService } from '../../core/services/authenticity.service';
   providers: [ AuthService ]
 })
 
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   public isAuthorized: boolean;
   public authService: AuthService;
 
@@ -18,7 +18,7 @@ export class HeaderComponent implements OnInit {
     this.authService = authService;
   }
 
-   public ngOnInit(): void {
-     this.isAuthorized = this.authService.isAuth();
-  }
+  //  public ngOnInit(): void {
+  //    this.isAuthorized = this.authService.isAuth();
+  // }
 }

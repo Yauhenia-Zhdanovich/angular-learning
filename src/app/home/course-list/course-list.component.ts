@@ -13,6 +13,7 @@ import { CourseItem } from '../../shared/interfaces/course-interface';
 import { CourseService } from '../../core/services/course.service';
 import { OnDeleteDialogComponent } from './on-delete-dialog/on-delete-dialog.component';
 import { CourseSearchPipe } from '../../core/pipes/course-search.pipe';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-course-list',
@@ -33,7 +34,7 @@ export class CourseListComponent implements OnInit, OnChanges, OnDestroy {
   public dialogRef: MatDialogRef<OnDeleteDialogComponent>;
   public courseSearchPipe: CourseSearchPipe;
   public courseService: CourseService;
-  public courseSubscriber: any;
+  public courseSubscriber: Subscription;
 
   constructor(
     courseService: CourseService,
@@ -67,7 +68,6 @@ export class CourseListComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   public getCourses(): void {
-    this.courseSubscriber = this.courseService.getCourses().subscribe(x => this.coursesList.push(x));
-    console.log(this.coursesList);
+    this.courseSubscriber = this.courseService.getCourses().subscribe(element => this.coursesList.push(element));
   }
 }

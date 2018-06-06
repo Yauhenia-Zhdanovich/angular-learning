@@ -1,4 +1,4 @@
-<div class='authorization-wrapper'>
-  <div class='user-login'>user login</div>
-  <a href="#" class='user-logoff' (click)="logOff()">logoff</a>
+<div class="authorization-wrapper" *ngIf="isAuthorized">
+  <div class="user-login">user login</div>
+  <a href="#" class="user-logoff" (click)="logOff()">logoff</a>
 </div>

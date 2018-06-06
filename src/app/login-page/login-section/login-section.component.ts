@@ -7,7 +7,7 @@ import { Credentials } from '../../shared/interfaces/credentials';
   selector: 'login-section',
   templateUrl: './login-section.component.html',
   styleUrls: ['./login-section.component.css'],
-  providers: [ AuthService ]
+  // providers: [ AuthService ]
 })
 export class LoginSectionComponent implements OnInit {
   public currentLogin: string;
@@ -19,10 +19,11 @@ export class LoginSectionComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    // let isAuth: boolean = this.authService.isAuth();
+    this.authService.isAuthenticatedSubject.subscribe((cred): void => console.log(cred, 'from login-section component'));
   }
+
   public logIn(): void {
-    let cred: Credentials = {login: this.currentLogin, password: this.currentPassword}
+    let cred: Credentials = {login: this.currentLogin, password: this.currentPassword};
     this.authService.logIn(cred);
   }
 }
