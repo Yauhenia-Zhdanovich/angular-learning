@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
-import { AuthService } from '../../core/services/authenticity.service';
-import { Credentials } from '../../shared/interfaces/credentials';
+import { AuthService } from "../../core/services/authenticity.service";
+import { Credentials } from "../../shared/interfaces/credentials";
 
 @Component({
-  selector: 'login-section',
-  templateUrl: './login-section.component.html',
-  styleUrls: ['./login-section.component.css'],
+  selector: "login-section",
+  templateUrl: "./login-section.component.html",
+  styleUrls: ["./login-section.component.css"]
   // providers: [ AuthService ]
 })
 export class LoginSectionComponent implements OnInit {
@@ -19,11 +19,17 @@ export class LoginSectionComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.authService.isAuthenticatedSubject.subscribe((cred): void => console.log(cred, 'from login-section component'));
+    this.authService.test().subscribe(data => console.log(data));
+    this.authService.isAuthenticatedSubject.subscribe(
+      (cred): void => console.log(cred, "from login-section component")
+    );
   }
 
   public logIn(): void {
-    let cred: Credentials = {login: this.currentLogin, password: this.currentPassword};
+    let cred: Credentials = {
+      login: this.currentLogin,
+      password: this.currentPassword
+    };
     this.authService.logIn(cred);
   }
 }
