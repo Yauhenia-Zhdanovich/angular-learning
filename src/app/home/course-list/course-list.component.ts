@@ -9,7 +9,7 @@ import {
 import { MatDialog } from '@angular/material';
 import { MatDialogRef } from '@angular/material';
 
-import { CourseItem } from '../../shared/interfaces/course-interface';
+import { CourseItem } from '../../shared/interfaces/course.interface';
 import { CourseService } from '../../core/services/course.service';
 import { OnDeleteDialogComponent } from './on-delete-dialog/on-delete-dialog.component';
 import { CourseSearchPipe } from '../../core/pipes/course-search.pipe';
@@ -49,6 +49,7 @@ export class CourseListComponent implements OnInit, OnChanges, OnDestroy {
 
   public ngOnInit(): void {
     this.getCourses();
+    console.log(this.courseService.test());
   }
   public ngOnChanges(): void {
     this.filteredList = this.courseSearchPipe.transform(this.coursesList, this.searchValue);

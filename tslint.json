@@ -30,7 +30,7 @@
       true,
       "spaces"
     ],
-    "interface-name": [true, "always-prefix"],
+    "interface-name": [false],
     "jsdoc-format": true,
     "label-position": true,
     "max-line-length": [

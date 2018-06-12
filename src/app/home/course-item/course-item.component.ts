@@ -5,7 +5,7 @@ import {
   EventEmitter,
   OnInit
 } from '@angular/core';
-import { CourseItem } from '../../shared/interfaces/course-interface';
+import { CourseItem } from '../../shared/interfaces/course.interface';
 
 @Component({
   selector: 'app-course-item',

@@ -1,4 +1,4 @@
-import { CourseItem } from '../interfaces/course-interface';
+import { CourseItem } from '../interfaces/course.interface';
 
 export const COURSELIST: Array<CourseItem> = [
   {
