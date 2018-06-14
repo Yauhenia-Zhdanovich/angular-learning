@@ -9,7 +9,7 @@ import {
 import { MatDialog } from '@angular/material';
 import { MatDialogRef } from '@angular/material';
 
-import { CourseItem } from '../../shared/interfaces/course-interface';
+import { CourseItem } from '../../shared/interfaces/course.interface';
 import { CourseService } from '../../core/services/course.service';
 import { OnDeleteDialogComponent } from './on-delete-dialog/on-delete-dialog.component';
 import { CourseSearchPipe } from '../../core/pipes/course-search.pipe';
@@ -26,8 +26,6 @@ import { Subscription } from 'rxjs';
 })
 
 export class CourseListComponent implements OnInit, OnChanges, OnDestroy {
-  @Input('searchValue')
-  public searchValue: string;
   public coursesList: Array<CourseItem> = [];
   public filteredList: Array<CourseItem> = [];
   public dialog: MatDialog;
@@ -35,6 +33,9 @@ export class CourseListComponent implements OnInit, OnChanges, OnDestroy {
   public courseSearchPipe: CourseSearchPipe;
   public courseService: CourseService;
   public courseSubscriber: Subscription;
+
+  @Input('searchValue')
+  public searchValue: string;
 
   constructor(
     courseService: CourseService,
@@ -44,7 +45,6 @@ export class CourseListComponent implements OnInit, OnChanges, OnDestroy {
     this.courseService = courseService;
     this.courseSearchPipe = courseSearchPipe;
     this.dialog = dialog;
-    this.filteredList = [];
   }
 
   public ngOnInit(): void {

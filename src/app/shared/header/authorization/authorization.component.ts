@@ -1,37 +1,36 @@
 import {
   Component,
   OnInit,
-  OnChanges
+  OnDestroy
 } from '@angular/core';
 import { AuthService } from '../../../core/services/authenticity.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'authorization',
   templateUrl: './authorization.component.html',
   styleUrls: ['./authorization.component.css'],
-  // providers: [ AuthService ]
 })
-export class AuthorizationComponent implements OnInit {
+
+export class AuthorizationComponent implements OnInit, OnDestroy {
+  private authServiceSub: Subscription;
   public authService: AuthService;
-  public isAuthorized: boolean;
 
   constructor(authService: AuthService) {
     this.authService = authService;
   }
 
   public ngOnInit(): void {
-    this.authService.isAuthenticatedSubject.subscribe((cred): void => {
+    this.authServiceSub = this.authService.isAuthenticatedSubject.subscribe((cred): void => {
       console.log(cred, 'from auth component');
-      if (cred.password) {
-        this.isAuthorized = true;
-        console.log(this.isAuthorized);
-      }
     });
-    this.isAuthorized = this.authService.isAuth();
+  }
+
+  public ngOnDestroy(): void {
+    this.authServiceSub.unsubscribe();
   }
 
   public logOff(): void {
     this.authService.logOut();
-    this.isAuthorized = this.authService.isAuth();
   }
 }

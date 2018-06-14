@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 
 import { LocalStorageService } from './local-storage.service';
 import { Credentials } from '../../shared/interfaces/credentials';
-import { Subject } from 'rxjs/Subject';
 import { ReplaySubject } from 'rxjs';
 
 @Injectable()

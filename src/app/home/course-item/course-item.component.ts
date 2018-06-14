@@ -5,7 +5,7 @@ import {
   EventEmitter,
   OnInit
 } from '@angular/core';
-import { CourseItem } from '../../shared/interfaces/course-interface';
+import { CourseItem } from '../../shared/interfaces/course.interface';
 
 @Component({
   selector: 'app-course-item',
@@ -29,7 +29,7 @@ export class CourseItemComponent implements OnInit {
   }
 
    public ngOnInit(): void {
-     this.isFresh = this.isFreshCheck(this.course.creatingDate);
+     this.isFresh = this.isFreshCheck(this.course.date);
    }
 
   public onDelete(id: number): void {
