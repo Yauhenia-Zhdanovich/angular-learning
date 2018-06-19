@@ -5,27 +5,26 @@ import { Credentials } from '../../shared/interfaces/credentials';
 @Injectable()
 
 export class LocalStorageService {
-  public loadCredentials (): Credentials {
+  public loadToken (): string {
     try {
-      const serializedCredentials: string = localStorage.getItem('credentials');
-      if (serializedCredentials) {
-        return JSON.parse(serializedCredentials);
+      const token: string = localStorage.getItem('userToken');
+      if (token) {
+        return token;
       }
     } catch (err) {
       console.log(err);
     }
   }
 
-  public storeCredentials (credentials: Credentials): void {
+  public storeToken (token: string): void {
     try {
-      const serializedCredentials: string = JSON.stringify(credentials);
-      localStorage.setItem('credentials', serializedCredentials);
+      localStorage.setItem('userToken', token);
     } catch (err) {
       console.log(err);
     }
   }
 
   public wipeCredentials (): void {
-    localStorage.removeItem('credentials');
+    localStorage.removeItem('userToken');
   }
 }

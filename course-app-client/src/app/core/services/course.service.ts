@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { COURSELIST } from '../../shared/mocks/mock-courses';
 import { CourseItem } from '../../shared/interfaces/course.interface';
@@ -14,10 +15,13 @@ import 'rxjs/add/operator/map';
 @Injectable()
 
 export class CourseService {
+  private http: HttpClient;
   private twoWeeks: number = MILLISEC_PER_DAY * DAYS_IN_WEEK;
+  private baseUrl: string = 'http://localhost:3004';
   public state: string;
 
-  constructor () {
+  constructor (http: HttpClient) {
+    this.http = http;
     this.state = 'authorization';
   }
 
