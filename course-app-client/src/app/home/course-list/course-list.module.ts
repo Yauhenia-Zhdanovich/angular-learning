@@ -7,6 +7,7 @@ import { CourseListComponent } from './course-list.component';
 import { CourseItemModule } from '../course-item/course-item.module';
 import { OnDeleteDialogComponent } from './on-delete-dialog/on-delete-dialog.component';
 import { SortByDatePipe } from '../../core/pipes/sort-by-date.pipe';
+import { CourseService } from '../../core/services/course.service';
 
 @NgModule({
   imports: [
@@ -23,6 +24,7 @@ import { SortByDatePipe } from '../../core/pipes/sort-by-date.pipe';
   exports: [
     CourseListComponent,
   ],
+  providers: [CourseService],
   entryComponents: [OnDeleteDialogComponent]
 })
 

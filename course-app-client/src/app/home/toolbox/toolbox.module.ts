@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
-
+import { CourseService } from '../../core/services/course.service';
 import { ToolboxComponent } from './toolbox.component';
 import { FormsModule } from '@angular/forms';
 
@@ -20,6 +20,7 @@ import { FormsModule } from '@angular/forms';
   exports: [
     ToolboxComponent
   ],
+  providers: [ CourseService ]
 })
 
 export class ToolboxModule {

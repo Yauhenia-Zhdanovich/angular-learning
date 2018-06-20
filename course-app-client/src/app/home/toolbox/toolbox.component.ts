@@ -3,6 +3,7 @@ import {
   Output,
   EventEmitter
 } from '@angular/core';
+import { CourseService } from '../../core/services/course.service';
 
 @Component({
   selector: 'toolbox',
@@ -11,17 +12,15 @@ import {
 })
 
 export class ToolboxComponent {
-  @Output()
-  public searchValue: EventEmitter<string> = new EventEmitter();
-
+  private courseService: CourseService;
   public courseName: string;
 
-  constructor() {
+  constructor(courseService: CourseService) {
+    this.courseService = courseService;
     this.courseName = '';
-    this.searchValue.emit(this.courseName);
   }
 
-  public logName (): void {
-    this.searchValue.emit(this.courseName);
+  public onClickSearch (): void {
+    this.courseService.serverCourseSearch(this.courseName.trim());
   }
 }

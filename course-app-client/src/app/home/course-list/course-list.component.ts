@@ -9,6 +9,7 @@ import {
 import { MatDialog } from '@angular/material';
 import { MatDialogRef } from '@angular/material';
 
+import { Course } from '../../shared/classes/course.class';
 import { CourseItem } from '../../shared/interfaces/course.interface';
 import { CourseService } from '../../core/services/course.service';
 import { OnDeleteDialogComponent } from './on-delete-dialog/on-delete-dialog.component';
@@ -20,7 +21,6 @@ import { Subscription } from 'rxjs';
   templateUrl: './course-list.component.html',
   styleUrls: ['./course-list.component.css'],
   providers: [
-    CourseService,
     CourseSearchPipe,
   ]
 })
@@ -49,7 +49,12 @@ export class CourseListComponent implements OnInit, OnChanges, OnDestroy {
 
   public ngOnInit(): void {
     this.getCourses();
+    this.courseService.courseSubject
+    .subscribe(data => this.coursesList = data.map(element => {
+      return new Course(element.id, element.name, element.date, element.length, element.description, element.isTopRated);
+    }));
   }
+
   public ngOnChanges(): void {
     this.filteredList = this.courseSearchPipe.transform(this.coursesList, this.searchValue);
   }
@@ -62,12 +67,16 @@ export class CourseListComponent implements OnInit, OnChanges, OnDestroy {
     this.dialogRef = this.dialog.open(OnDeleteDialogComponent, {height: '350px', width: '350px'});
     this.dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.courseService.removeItem(event);
+        this.courseService.removeItem(event)
+        .then(() => this.getCourses());
       }
     });
   }
 
   public getCourses(): void {
-    this.courseSubscriber = this.courseService.getCourses().subscribe(element => this.coursesList.push(element));
+    this.courseSubscriber = this.courseService.getCourses()
+      .subscribe(data => this.coursesList = data.map(element => {
+        return new Course(element.id, element.name, element.date, element.length, element.description, element.isTopRated);
+      }));
   }
 }
