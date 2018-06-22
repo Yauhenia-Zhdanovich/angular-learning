@@ -15,7 +15,6 @@ import { CourseService } from '../../core/services/course.service';
 import { OnDeleteDialogComponent } from './on-delete-dialog/on-delete-dialog.component';
 import { CourseSearchPipe } from '../../core/pipes/course-search.pipe';
 import { Subscription } from 'rxjs';
-import { HttpService } from '../../core/services/secureHttp.service';
 
 @Component({
   selector: 'app-course-list',
@@ -27,6 +26,7 @@ import { HttpService } from '../../core/services/secureHttp.service';
 })
 
 export class CourseListComponent implements OnInit, OnChanges, OnDestroy {
+  private pageCount: number;
   public coursesList: Array<CourseItem> = [];
   public filteredList: Array<CourseItem> = [];
   public dialog: MatDialog;
@@ -42,7 +42,6 @@ export class CourseListComponent implements OnInit, OnChanges, OnDestroy {
     courseService: CourseService,
     dialog: MatDialog,
     courseSearchPipe: CourseSearchPipe,
-    private secure: HttpService
   ) {
     this.courseService = courseService;
     this.courseSearchPipe = courseSearchPipe;
@@ -50,14 +49,8 @@ export class CourseListComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   public ngOnInit(): void {
+    this.pageCount = 1;
     this.getCourses();
-    this.secure.get('http://localhost:3004/users')
-        .map(res => res.json())
-        .subscribe(
-            data =>  console.log(data) ,
-            err => console.log(err),
-            () => console.log('Request Complete')
-        );
     this.courseService.courseSubject
     .subscribe(data => this.coursesList = data.map(element => {
       return new Course(element.id, element.name, element.date, element.length, element.description, element.isTopRated);
@@ -82,8 +75,16 @@ export class CourseListComponent implements OnInit, OnChanges, OnDestroy {
     });
   }
 
+  public onShowMoreClick(): void {
+    this.pageCount += 1;
+    this.courseService.getCourses(this.pageCount)
+      .subscribe(data => this.coursesList = data.map(element => {
+        return new Course(element.id, element.name, element.date, element.length, element.description, element.isTopRated);
+      }));
+  }
+
   public getCourses(): void {
-    this.courseSubscriber = this.courseService.getCourses()
+    this.courseSubscriber = this.courseService.getCourses(this.pageCount)
       .subscribe(data => this.coursesList = data.map(element => {
         return new Course(element.id, element.name, element.date, element.length, element.description, element.isTopRated);
       }));

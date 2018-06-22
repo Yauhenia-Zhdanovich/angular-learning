@@ -41,7 +41,7 @@ export class AuthService {
   }
 
   public getUserInfo(): Observable<any> {
-    let token: string = this.localStorageService.loadToken();
+    const token: string = this.localStorageService.loadToken();
     const urlParams: HttpParams = new HttpParams().set('fakeToken', token);
     return this.http.request('GET', `${this.baseUrl}/users`, { params: urlParams });
   }

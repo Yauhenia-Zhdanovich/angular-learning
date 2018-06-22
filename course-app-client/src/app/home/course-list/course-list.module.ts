@@ -1,6 +1,7 @@
 import { MatDialogModule } from '@angular/material';
 import { MatCardModule } from '@angular/material/card';
 
+import { MatButtonModule } from '@angular/material/button';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CourseListComponent } from './course-list.component';
@@ -14,7 +15,8 @@ import { CourseService } from '../../core/services/course.service';
     CommonModule,
     CourseItemModule,
     MatDialogModule,
-    MatCardModule
+    MatCardModule,
+    MatButtonModule
   ],
   declarations: [
     CourseListComponent,
