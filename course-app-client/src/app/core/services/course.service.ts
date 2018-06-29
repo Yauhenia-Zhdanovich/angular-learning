@@ -4,16 +4,15 @@ import { Response, RequestOptions, Request, RequestMethod, URLSearchParams } fro
 
 import { COURSELIST } from '../../shared/mocks/mock-courses';
 import { CourseItem } from '../../shared/interfaces/course.interface';
-import { Course } from '../../shared/classes/course.class';
+import { CourseData } from '../../shared/interfaces/course-data.interface';
 import { HttpService } from './secureHttp.service';
 import { MILLISEC_PER_DAY, DAYS_IN_WEEK } from '../../shared/constants/time-constants';
 
 import { ReplaySubject } from 'rxjs';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/of';
-import 'rxjs/add/observable/from';
-import 'rxjs/add/operator/filter';
-import 'rxjs/add/operator/map';
+import 'rxjs/observable/from';
+import 'rxjs/operator/filter';
+import 'rxjs/operators/map';
 
 @Injectable()
 
@@ -23,7 +22,7 @@ export class CourseService {
   private twoWeeks: number = MILLISEC_PER_DAY * DAYS_IN_WEEK;
   private baseUrl: string = 'http://localhost:3004';
   public state: string;
-  public courseSubject: ReplaySubject<any> = new ReplaySubject();
+  public courseSubject: ReplaySubject<Array<CourseData>> = new ReplaySubject();
 
   constructor (
     http: HttpClient,
@@ -34,7 +33,7 @@ export class CourseService {
     this.state = 'authorization';
   }
 
-  public getCourses (pageCount: number): Observable<any> {
+  public getCourses (pageCount: number): Observable<Array<CourseData>> {
     let requestOptions: RequestOptions = new RequestOptions();
     let request: Request;
     let urlSearchParams: URLSearchParams = new URLSearchParams();
@@ -48,11 +47,12 @@ export class CourseService {
         .map((res: Response) => res.json());
   }
 
+  // TODO ask about it
   public removeItem (id: number): Promise<any> {
     return this.http.delete(`${this.baseUrl}/courses/${id}`).toPromise();
   }
 
-  public serverCourseSearch(query: string): Observable<CourseItem[]> {
+  public serverCourseSearch(query: string): void {
     let requestOptions: RequestOptions = new RequestOptions();
     let request: Request;
     let urlSearchParams: URLSearchParams = new URLSearchParams();
@@ -61,7 +61,7 @@ export class CourseService {
     requestOptions.search = urlSearchParams;
     requestOptions.url = `${this.baseUrl}/courses/courses/courses`;
     request = new Request(requestOptions);
-    return this.secureHttp.request(request)
+    this.secureHttp.request(request)
         .map((res: Response) => res.json())
         .subscribe(data => {
           this.courseSubject.next(data);

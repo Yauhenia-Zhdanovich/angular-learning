@@ -40,6 +40,7 @@ export class AuthService {
     this.localStorageService.wipeCredentials();
   }
 
+  // TODO ask about it!
   public getUserInfo(): Observable<any> {
     const token: string = this.localStorageService.loadToken();
     const urlParams: HttpParams = new HttpParams().set('fakeToken', token);

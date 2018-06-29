@@ -1,7 +1,8 @@
 import { Directive,
   ElementRef,
   Input,
-  OnInit
+  OnInit,
+  Renderer2
 } from '@angular/core';
 
 @Directive({
@@ -10,19 +11,21 @@ import { Directive,
 
 export class IsFreshDirective implements OnInit {
   private el: ElementRef;
+  public renderer: Renderer2;
 
   @Input('isFresh')
   public isFresh: boolean;
 
-  constructor(el: ElementRef) {
+  constructor(el: ElementRef, renderer: Renderer2) {
     this.el = el;
+    this.renderer = renderer;
   }
 
   public ngOnInit(): void {
     if (this.isFresh) {
-      this.el.nativeElement.style.border = '1px solid #028973';
+      this.renderer.addClass(this.el.nativeElement, 'fresh');
     } else {
-      this.el.nativeElement.style.border = '1px solid #C9283E';
+      this.renderer.addClass(this.el.nativeElement, 'out-of-date');
     }
   }
 }
