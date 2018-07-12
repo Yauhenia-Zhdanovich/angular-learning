@@ -10,7 +10,8 @@ import { HomeComponentModule } from './home';
 import { LoginPageModule } from './login-page';
 import { LocalStorageService } from './core/services/local-storage.service';
 import { AddCoursePageModule } from './add-course-page';
-import { HttpService } from './core/services/secureHttp.service';
+import { httpInterceptorProviders } from './core/interceptors';
+import { AuthService } from './core/services/authenticity.service';
 
 @NgModule({
   declarations: [
@@ -28,13 +29,9 @@ import { HttpService } from './core/services/secureHttp.service';
   ],
   providers: [
     LocalStorageService,
-    {
-      provide: HttpService,
-      useFactory: (backend: XHRBackend, options: RequestOptions) => {
-        return new HttpService(backend, options);
-      },
-      deps: [XHRBackend, RequestOptions]
-    }],
+    httpInterceptorProviders,
+    AuthService
+  ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

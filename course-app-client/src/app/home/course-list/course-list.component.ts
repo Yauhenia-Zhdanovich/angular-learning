@@ -86,11 +86,10 @@ export class CourseListComponent implements OnInit, OnChanges, OnDestroy, AfterV
           return this.courseService.getCourses(this.pageCount);
         })
         .switch()
-        .subscribe(data => 
-          this.coursesList = data.map(element => {
-            return this.createCourseItem(element);
-          })
-        );
+        .subscribe(data => {
+          this.coursesList = data.map(element => this.createCourseItem(element));
+        }
+      );
   }
 
   public ngOnDestroy(): void {

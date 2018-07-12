@@ -46,4 +46,8 @@ export class AuthService {
     const urlParams: HttpParams = new HttpParams().set('fakeToken', token);
     return this.http.request('GET', `${this.baseUrl}/users`, { params: urlParams });
   }
+
+  public getToken(): string {
+    return this.localStorageService.loadToken();
+  }
 }
