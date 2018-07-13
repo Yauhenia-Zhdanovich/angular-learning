@@ -26,7 +26,7 @@ export class AuthService {
     return !!token;
   }
 
-  public logIn ({login, password }: Credentials): void {
+  public logIn({login, password }: Credentials): void {
     let token: string;
     const urlParams: HttpParams = new HttpParams().set('login', login).set('password', password);
     this.http.request('GET', `${this.baseUrl}/users`, { params: urlParams })
@@ -35,9 +35,9 @@ export class AuthService {
     this.localStorageService.storeToken(token);
   }
 
-  public logOut (): void {
+  public logOut(): void {
     this.isAuthenticatedSubject.next({login: '', password: ''});
-    this.localStorageService.wipeCredentials();
+    this.localStorageService.wipeToken();
   }
 
   // TODO ask about it!

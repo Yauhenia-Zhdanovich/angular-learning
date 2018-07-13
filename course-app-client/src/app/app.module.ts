@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { HttpModule, Http, XHRBackend, RequestOptions } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { HomeComponentModule } from './home';
@@ -25,7 +24,6 @@ import { AuthService } from './core/services/authenticity.service';
     LoginPageModule,
     AddCoursePageModule,
     BrowserAnimationsModule,
-    HttpModule
   ],
   providers: [
     LocalStorageService,

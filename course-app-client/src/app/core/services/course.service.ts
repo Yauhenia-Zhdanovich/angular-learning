@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
+
 import { COURSELIST } from '../../shared/mocks/mock-courses';
 import { CourseItem } from '../../shared/interfaces/course.interface';
 import { CourseData } from '../../shared/interfaces/course-data.interface';
@@ -10,7 +11,6 @@ import 'rxjs/operator/filter';
 import 'rxjs/add/operator/map';
 
 @Injectable()
-
 export class CourseService {
   private http: HttpClient;
   private baseUrl: string = 'http://localhost:3004';
@@ -24,13 +24,13 @@ export class CourseService {
     this.state = 'authorization';
   }
 
-  public getCourses (pageCount: number): Observable<CourseData[]> {
+  public getCourses(pageCount: number): Observable<CourseData[]> {
     const urlParams: HttpParams = new HttpParams().set('_limit', '5').set('_page', pageCount + '');
     return this.http.get<any>(`${this.baseUrl}/courses/courses/courses`, {params: urlParams});
   }
 
   // TODO ask about it
-  public removeItem (id: number): Promise<any> {
+  public removeItem(id: number): Promise<any> {
     return this.http.delete(`${this.baseUrl}/courses/${id}`).toPromise();
   }
 

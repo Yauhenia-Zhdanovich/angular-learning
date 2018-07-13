@@ -3,6 +3,7 @@ import {
   OnInit,
   OnDestroy
 } from '@angular/core';
+
 import { AuthService } from '../../../core/services/authenticity.service';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -11,7 +12,6 @@ import { Subscription } from 'rxjs/Subscription';
   templateUrl: './authorization.component.html',
   styleUrls: ['./authorization.component.css'],
 })
-
 export class AuthorizationComponent implements OnInit, OnDestroy {
   private authServiceSub: Subscription;
   public authService: AuthService;
