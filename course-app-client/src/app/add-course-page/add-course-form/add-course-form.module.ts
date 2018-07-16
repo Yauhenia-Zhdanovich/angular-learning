@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { DatePickerModule } from './date-picker';
 import { DurationSetterModule } from './duration-setter';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -12,7 +13,8 @@ import { DurationSetterModule } from './duration-setter';
     MatButtonModule,
     MatInputModule,
     DatePickerModule,
-    DurationSetterModule
+    DurationSetterModule,
+    ReactiveFormsModule
   ],
   declarations: [
     AddCourseFormComponent

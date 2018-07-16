@@ -29,7 +29,6 @@ export class CourseService {
     return this.http.get<any>(`${this.baseUrl}/courses/courses/courses`, {params: urlParams});
   }
 
-  // TODO ask about it
   public removeItem(id: number): Promise<any> {
     return this.http.delete(`${this.baseUrl}/courses/${id}`).toPromise();
   }

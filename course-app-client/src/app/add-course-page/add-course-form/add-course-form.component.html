@@ -1,16 +1,22 @@
 <main class="form-main">
-  <div class="form-group">
-    <label for="title" class="form-label">Title</label>
-      <input type="text" id="title" placeholder="Text input">
-  </div>
-  <div class="form-group">
-    <label for="description" class="form-label">Description</label>
-      <textarea id="description" placeholder="Text area"></textarea>
-  </div>
-  <date-picker></date-picker>
-  <duration-setter></duration-setter>
-  <div class="btn-group">
-    <button class="btn-form" (click)="onSave()">Save</button>
-    <button class="btn-form" (click)="onCancel()">Cancel</button>
-  </div>
+  <form action="" [formGroup]="heroForm">
+      <div class="form-group">
+          <label for="title" class="form-label">Title</label>
+            <input
+            type="text"
+            id="title"
+            placeholder="Text input"
+            formControlName="name">
+        </div>
+        <div class="form-group">
+          <label for="description" class="form-label">Description</label>
+            <textarea id="description" placeholder="Text area"></textarea>
+        </div>
+        <date-picker></date-picker>
+        <duration-setter></duration-setter>
+        <div class="btn-group">
+          <button class="btn-form" (click)="onSave()">Save</button>
+          <button class="btn-form" (click)="onCancel()">Cancel</button>
+        </div>
+  </form>
 </main>

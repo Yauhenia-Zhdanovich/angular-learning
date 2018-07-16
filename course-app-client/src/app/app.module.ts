@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';  // <-- #1 import module
 
 import { AppComponent } from './app.component';
 import { HomeComponentModule } from './home';
@@ -24,6 +25,7 @@ import { AuthService } from './core/services/authenticity.service';
     LoginPageModule,
     AddCoursePageModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule
   ],
   providers: [
     LocalStorageService,
