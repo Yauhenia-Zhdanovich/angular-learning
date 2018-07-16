@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { HttpModule, Http, XHRBackend, RequestOptions } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { HomeComponentModule } from './home';
@@ -24,17 +23,10 @@ import { HttpService } from './core/services/secureHttp.service';
     LoginPageModule,
     AddCoursePageModule,
     BrowserAnimationsModule,
-    HttpModule
   ],
   providers: [
     LocalStorageService,
-    {
-      provide: HttpService,
-      useFactory: (backend: XHRBackend, options: RequestOptions) => {
-        return new HttpService(backend, options);
-      },
-      deps: [XHRBackend, RequestOptions]
-    }],
+    ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
