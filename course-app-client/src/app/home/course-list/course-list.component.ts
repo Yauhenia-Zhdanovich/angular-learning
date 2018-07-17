@@ -4,11 +4,10 @@ import {
   Input,
   OnChanges,
   OnDestroy,
-  ViewChild,
-  ElementRef,
-  AfterViewInit
 } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+
+import { Subscription } from 'rxjs';
+import { ReplaySubject } from 'rxjs';
 import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/switch';
@@ -22,7 +21,6 @@ import { CourseData } from '../../shared/interfaces/course-data.interface';
 import { CourseService } from '../../core/services/course.service';
 import { OnDeleteDialogComponent } from './on-delete-dialog/on-delete-dialog.component';
 import { CourseSearchPipe } from '../../core/pipes/course-search.pipe';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-course-list',
@@ -33,7 +31,7 @@ import { Subscription } from 'rxjs';
   ]
 })
 
-export class CourseListComponent implements OnInit, OnChanges, OnDestroy, AfterViewInit  {
+export class CourseListComponent implements OnInit, OnChanges, OnDestroy {
   private pageCount: number;
   public coursesList: Array<CourseItem> = [];
   public filteredList: Array<CourseItem> = [];
@@ -42,14 +40,11 @@ export class CourseListComponent implements OnInit, OnChanges, OnDestroy, AfterV
   public courseSearchPipe: CourseSearchPipe;
   public courseService: CourseService;
   public courseSubscriber: Subscription;
-  public dynamicCourseUpload: Subscription;
   public deleteCourseSubscription: Subscription;
+  public dynamicCourseUpload: ReplaySubject<number> = new ReplaySubject();
 
   @Input('searchValue')
   public searchValue: string;
-
-  @ViewChild('uploadButton')
-  public uploadButton: ElementRef;
 
   constructor(
     courseService: CourseService,
@@ -69,34 +64,30 @@ export class CourseListComponent implements OnInit, OnChanges, OnDestroy, AfterV
     this.getCourses();
     this.pageCount = 1;
     this.courseService.courseSubject
-    .subscribe(data => this.coursesList = data.map(element => {
-      return this.createCourseItem(element);
-    }));
+      .subscribe(data => this.coursesList = data.map(element => {
+        return this.createCourseItem(element);
+      }));
+    this.dynamicCourseUpload
+      .map((pageCount) => {
+      return this.courseService.getCourses(pageCount);
+    })
+      .switch().subscribe((data) => {
+      this.coursesList = this.coursesList.concat(data.map(element => this.createCourseItem(element)));
+    });
   }
 
   public ngOnChanges(): void {
     this.filteredList = this.courseSearchPipe.transform(this.coursesList, this.searchValue);
   }
 
-  public ngAfterViewInit(): void {
-    this.dynamicCourseUpload = 
-      Observable.fromEvent(this.uploadButton.nativeElement, 'click')
-        .do(() => this.pageCount++)
-        .map(() => {
-          return this.courseService.getCourses(this.pageCount);
-        })
-        .switch()
-        .subscribe(data => 
-          this.coursesList = data.map(element => {
-            return this.createCourseItem(element);
-          })
-        );
-  }
-
   public ngOnDestroy(): void {
     this.courseSubscriber.unsubscribe();
     this.dynamicCourseUpload.unsubscribe();
     this.deleteCourseSubscription.unsubscribe();
+  }
+
+  public onCourseUploadClick(): void {
+    this.dynamicCourseUpload.next(++this.pageCount);
   }
 
   public onDelete(event: number): void {

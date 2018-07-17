@@ -1,16 +1,29 @@
 <main class="form-main">
-  <div class="form-group">
-    <label for="title" class="form-label">Title</label>
-      <input type="text" id="title" placeholder="Text input">
-  </div>
-  <div class="form-group">
-    <label for="description" class="form-label">Description</label>
-      <textarea id="description" placeholder="Text area"></textarea>
-  </div>
-  <date-picker></date-picker>
-  <duration-setter></duration-setter>
-  <div class="btn-group">
-    <button (click)="onSave()" color="primary">Save</button>
-    <button (click)="onCancel()" color="warn">Cancel</button>
-  </div>
+  <form action="" [formGroup]="courseDescriptionGroup" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="title" class="form-label">Title</label>
+        <input type="text"
+          id="title"
+          placeholder="Text input"
+          formControlName="title"
+          maxlength="50">
+    </div>
+    <div class="form-group">
+      <label for="description"
+        class="form-label">
+        Description</label>
+        <textarea id="description"
+          placeholder="Text area"
+          maxlength="50"
+          formControlName="description"></textarea>
+    </div>
+    <date-picker></date-picker>
+    <duration-setter></duration-setter>
+    <div class="btn-group">
+      <button (click)="onSave()" type="submit">Save</button>
+      <button (click)="onCancel()">Cancel</button>
+    </div>
+</form>
 </main>
+<p>Form value: {{ courseDescriptionGroup.value | json }}</p>
+<p>Form status: {{ courseDescriptionGroup.status | json }}</p>

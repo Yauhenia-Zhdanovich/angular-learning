@@ -3,13 +3,14 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-
+import { ReactiveFormsModule } from '@angular/forms';  // <-- #1 import module
 import { AppComponent } from './app.component';
 import { HomeComponentModule } from './home';
 import { LoginPageModule } from './login-page';
 import { LocalStorageService } from './core/services/local-storage.service';
 import { AddCoursePageModule } from './add-course-page';
-import { HttpService } from './core/services/secureHttp.service';
+import { httpInterceptorProviders } from './core/interceptors';
+import { AuthService } from './core/services/authenticity.service';
 
 @NgModule({
   declarations: [
@@ -23,10 +24,13 @@ import { HttpService } from './core/services/secureHttp.service';
     LoginPageModule,
     AddCoursePageModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule
   ],
   providers: [
     LocalStorageService,
-    ],
+    httpInterceptorProviders,
+    AuthService
+  ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
