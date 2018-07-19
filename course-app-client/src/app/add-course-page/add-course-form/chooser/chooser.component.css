@@ -1,0 +1,18 @@
+.chooser {
+  width: 60%;
+  background: #fff;
+}
+
+.chooser-list {
+  padding: .5rem;
+  list-style: none;
+}
+
+.chooser-block {
+  display: flex;
+}
+
+.chooser-header {
+  align-self: center;
+  padding: 0 2rem;
+}

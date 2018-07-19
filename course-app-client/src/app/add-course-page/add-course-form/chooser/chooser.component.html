@@ -1,0 +1,12 @@
+<div class="chooser-block" (click)="propagateTouch()">
+  <div class="chooser-header">Authors</div>
+  <div class="chooser">
+    <ul class="chooser-list">
+      <li *ngFor="let author of authors">
+        <input type="checkbox" [checked]="author.checked" (change)="onCheckboxChange(author)">
+        <span>{{author.name}}</span>
+      </li>
+    </ul>  
+  </div>
+</div>
+

@@ -1,4 +1,10 @@
 <div>
-  <label for="date">Title</label>
-    <input type="text" id="date" placeholder="25.4.2018">
+  <label for="date">Date</label>
+    <input
+      [ngClass]="{'red-border': !isValid && isTouched}"
+      (blur)="propagateTouch()"
+      id="date"
+      placeholder="25.4.2018"
+      (input)="onInput($event)"
+      [value]="datePickerValue">
 </div>

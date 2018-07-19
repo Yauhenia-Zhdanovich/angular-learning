@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { validateDate } from '../../core/validators/date-validator';
 
 @Component({
   selector: 'add-course-form',
@@ -8,7 +9,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class AddCourseFormComponent {
   private formBuilder: FormBuilder;
-  public courseDescriptionGroup: FormGroup;
+  public courseForm: FormGroup;
 
   constructor(formBuilder: FormBuilder) {
     this.formBuilder = formBuilder;
@@ -16,18 +17,22 @@ export class AddCourseFormComponent {
   }
 
   public createForm(): void {
-    this.courseDescriptionGroup = this.formBuilder.group({
+    this.courseForm = this.formBuilder.group({
       title: ['', [Validators.required, Validators.maxLength(50)]],
-      description: ['', [Validators.required, Validators.maxLength(500)]]
+      description: ['', [Validators.required, Validators.maxLength(500)]],
+      date: ['', [Validators.required, validateDate]],
+      duration: [undefined, [Validators.required, Validators.pattern('[0-9]*$')]],
+      authors: [undefined, Validators.required]
     });
   }
 
   public onSubmit(): void {
-    console.log(this.courseDescriptionGroup.dirty);
+    console.log(this.courseForm.dirty);
   }
 
   public onSave(): void {
     console.log('course saved');
+    this.courseForm.reset();
   }
 
   public onCancel(): void {
