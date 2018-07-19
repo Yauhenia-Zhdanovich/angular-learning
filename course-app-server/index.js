@@ -23,7 +23,7 @@ walk('./services', function (err, results) {
 		server.use(ang.middleware);
 		server.use(ang.db);
 
-		server.listen(3005, function () {
+		server.listen(3004, function () {
 			console.log('JSON Server is running on 3004');
 		});
 	}
