@@ -30,6 +30,12 @@ export class ChooserComponent implements ControlValueAccessor, OnInit, OnDestroy
   public authors: CreateAuthor;
 
   @Input()
+  public isValid: boolean;
+
+  @Input()
+  public isTouched: boolean;
+  
+  @Input()
   public _chooserValue: string[] = [];
 
   constructor(fetchAuthorService: FetchAuthorService) {

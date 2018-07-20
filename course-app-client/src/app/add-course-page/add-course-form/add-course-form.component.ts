@@ -16,7 +16,7 @@ export class AddCourseFormComponent {
     this.createForm();
   }
 
-  public createForm(): void {
+  private createForm(): void {
     this.courseForm = this.formBuilder.group({
       title: ['', [Validators.required, Validators.maxLength(50)]],
       description: ['', [Validators.required, Validators.maxLength(500)]],

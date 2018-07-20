@@ -64,13 +64,21 @@
         </div>
       </div>
     </div>
-    <chooser formControlName="authors"></chooser>
+    <div class="form-group">
+      <chooser
+        formControlName="authors"
+        [isValid]="courseForm.controls.authors.valid"
+        [isTouched]="courseForm.controls.authors.touched">
+      </chooser>
+      <div *ngIf="courseForm.controls.authors.errors">
+        <div *ngIf="courseForm.controls.authors.errors.required && courseForm.controls.authors.touched">
+          this field id required
+        </div>
+      </div>
+    </div>
     <div class="btn-group">
       <button (click)="onSave()" type="submit" [disabled]="!courseForm.valid">Save</button>
       <button (click)="onCancel()">Cancel</button>
     </div>
 </form>
 </main>
-<p>Form value: {{ courseForm.value | json }}</p>
-<p>Form status: {{ courseForm.status | json }}</p>
-<p>{{courseForm.controls.duration.errors | json}}</p>

@@ -1,12 +1,15 @@
-<div class="chooser-block" (click)="propagateTouch()">
+<div class="chooser-block">
   <div class="chooser-header">Authors</div>
-  <div class="chooser">
+  <div class="chooser" [ngClass]="{'red-border': !isValid && isTouched}">
     <ul class="chooser-list">
       <li *ngFor="let author of authors">
-        <input type="checkbox" [checked]="author.checked" (change)="onCheckboxChange(author)">
+        <input
+          type="checkbox"
+          (click)="propagateTouch()"
+          [checked]="author.checked"
+          (change)="onCheckboxChange(author)">
         <span>{{author.name}}</span>
       </li>
     </ul>  
   </div>
 </div>
-

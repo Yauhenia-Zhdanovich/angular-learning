@@ -16,3 +16,7 @@
   align-self: center;
   padding: 0 2rem;
 }
+
+.red-border {
+  border: 1px solid red;
+}

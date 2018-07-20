@@ -3,14 +3,15 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';  // <-- #1 import module
-import { AppComponent } from './app.component';
-import { HomeComponentModule } from './home';
-import { LoginPageModule } from './login-page';
-import { LocalStorageService } from './core/services/local-storage.service';
-import { AddCoursePageModule } from './add-course-page';
+import { ReactiveFormsModule } from '@angular/forms';
 import { httpInterceptorProviders } from './core/interceptors';
+
 import { AuthService } from './core/services/authenticity.service';
+import { AppComponent } from './app.component';
+import { AddCoursePageModule } from './add-course-page';
+import { LocalStorageService } from './core/services/local-storage.service';
+import { LoginPageModule } from './login-page';
+import { HomeComponentModule } from './home';
 
 @NgModule({
   declarations: [
@@ -33,4 +34,4 @@ import { AuthService } from './core/services/authenticity.service';
   ],
   bootstrap: [ AppComponent ]
 })
-export class AppModule { }
+export class AppModule {}
