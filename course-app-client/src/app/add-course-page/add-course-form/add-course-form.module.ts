@@ -4,11 +4,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
-import { AddCourseFormComponent } from './add-course-form.component';
 
 import { DatePickerModule } from './date-picker';
 import { DurationSetterModule } from './duration-setter';
-import { ChooserModule } from './chooser/chooser.module';
+import { ChooserModule } from './chooser';
+import { AddCourseFormComponent } from './add-course-form.component';
 
 @NgModule({
   imports: [
@@ -27,6 +27,5 @@ import { ChooserModule } from './chooser/chooser.module';
     AddCourseFormComponent,
   ]
 })
-
 export class AddCourseFormModule {
 }

@@ -27,12 +27,7 @@ export class AddCourseFormComponent {
   }
 
   public onSubmit(): void {
-    console.log(this.courseForm.dirty);
-  }
-
-  public onSave(): void {
-    console.log('course saved');
-    this.courseForm.reset();
+    console.log('form was submitted');
   }
 
   public onCancel(): void {

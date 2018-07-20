@@ -51,7 +51,7 @@ export class DurationSetterComponent implements ControlValueAccessor {
     this.propagateTouch = fn;
   }
 
-  public onInputChange(event: any): void {
+  public onInputChange(event): void {
     this.durationSetterValue = event.target.value;    
   }
 }
