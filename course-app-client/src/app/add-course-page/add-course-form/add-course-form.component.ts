@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { validateDate } from '../../core/validators/date-validator';
 
 @Component({
@@ -27,12 +28,7 @@ export class AddCourseFormComponent {
   }
 
   public onSubmit(): void {
-    console.log(this.courseForm.dirty);
-  }
-
-  public onSave(): void {
-    console.log('course saved');
-    this.courseForm.reset();
+    console.log('form was submitted');
   }
 
   public onCancel(): void {

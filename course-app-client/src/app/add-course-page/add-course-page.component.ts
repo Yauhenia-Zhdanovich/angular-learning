@@ -4,6 +4,4 @@ import { Component } from '@angular/core';
   selector: 'add-course-page',
   templateUrl: './add-course-page.component.html',
 })
-export class AddCoursePageComponent {
-  public state: string = 'authorization';
-}
+export class AddCoursePageComponent {}

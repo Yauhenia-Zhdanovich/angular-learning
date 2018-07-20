@@ -6,10 +6,10 @@ import {
   OnDestroy
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { FetchAuthorService } from '../../../core/services/fetch-author.service';
 import { Subscription } from 'rxjs';
 
 import { CreateAuthor } from '../../../shared/interfaces/create-author.interface';
+import { FetchAuthorService } from '../../../core/services/fetch-author.service';
 
 @Component({
   selector: 'chooser',
@@ -23,7 +23,6 @@ import { CreateAuthor } from '../../../shared/interfaces/create-author.interface
     }
   ]
 })
-
 export class ChooserComponent implements ControlValueAccessor, OnInit, OnDestroy {
   private getAuthorsSub: Subscription;
   public fetchAuthorService: FetchAuthorService;
@@ -71,13 +70,13 @@ export class ChooserComponent implements ControlValueAccessor, OnInit, OnDestroy
 
   public propagateChange = (_: null | string[]) => {};
 
-  public registerOnChange(fn): void {
+  public registerOnChange(fn: any): void {
     this.propagateChange = fn;
   }
 
   public propagateTouch = (_: string) => {}
 
-  public registerOnTouched(fn): void {
+  public registerOnTouched(fn: any): void {
     this.propagateTouch = fn;
   }
 

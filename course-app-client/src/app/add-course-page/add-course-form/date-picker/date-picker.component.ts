@@ -36,7 +36,7 @@ export class DatePickerComponent implements ControlValueAccessor {
     this.propagateChange(this._datePickerValue);
   }
 
-  public writeValue(value: any): void {
+  public writeValue(value: string): void {
     if (value !== undefined) {
       this.datePickerValue = value;
     }
@@ -54,7 +54,7 @@ export class DatePickerComponent implements ControlValueAccessor {
     this.propagateTouch = fn;
   }
 
-  public onInput(event: any): void {
+  public onInput(event): void {
     this.datePickerValue = event.target.value;
   }
 }
