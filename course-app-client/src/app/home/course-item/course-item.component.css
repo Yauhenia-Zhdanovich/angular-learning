@@ -35,9 +35,9 @@
 }
 
 .fresh {
-  border: 1px solid #028973;
+  border: .05rem solid #028973;
 }
 
 .out-of-date {
-  border: 1px solid #C9283E;
+  border: .05rem solid #C9283E;
 }

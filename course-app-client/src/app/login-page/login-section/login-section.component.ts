@@ -42,7 +42,6 @@ export class LoginSectionComponent implements OnInit, OnDestroy {
 
   public logIn(): void {
     const cred: Credentials = this.authForm.value;
-    console.log(cred);
     this.authService.logIn(cred);
   }
 

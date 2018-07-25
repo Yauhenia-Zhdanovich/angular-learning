@@ -13,6 +13,5 @@ export class HomeComponent {
 
   public onSearch(searchName: string): void {
     this.searchValue = searchName;
-    // console.log(searchName);
   }
 }

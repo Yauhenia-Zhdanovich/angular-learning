@@ -1,17 +1,17 @@
-.component-border{
-  border: 1px solid #aaa;
-  border-radius: 2px;
+.component-border {
   display: flex;
   justify-content: space-between;
+  border: .05rem solid #aaa;
+  border-radius: .1rem;
 }
-.logo-image{
-  width:100px;
-  height:auto;
+.logo-image {
+  width: 7rem;
+  height: auto;
 }
-.logo-wrapper{
-  display:flex;
+.logo-wrapper {
+  display: flex;
   align-items: flex-start;
 }
-.logo-text{
+.logo-text {
   align-self: center;
 }

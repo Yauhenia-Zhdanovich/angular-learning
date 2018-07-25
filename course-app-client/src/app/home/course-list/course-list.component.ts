@@ -6,10 +6,8 @@ import {
   OnDestroy,
 } from '@angular/core';
 
-import { Subscription } from 'rxjs';
-import { ReplaySubject } from 'rxjs';
-import 'rxjs/add/observable/fromEvent';
-import 'rxjs/add/operator/do';
+import { Subscription, ReplaySubject, pipe } from 'rxjs';
+import { map } from 'rxjs/operators';
 import 'rxjs/add/operator/switch';
 
 import { MatDialog } from '@angular/material';
@@ -67,11 +65,12 @@ export class CourseListComponent implements OnInit, OnChanges, OnDestroy {
       .subscribe(data => this.coursesList = data.map(element => {
         return this.createCourseItem(element);
       }));
-    this.dynamicCourseUpload
-      .map((pageCount) => {
-      return this.courseService.getCourses(pageCount);
-    })
-      .switch().subscribe((data) => {
+    this.dynamicCourseUpload.pipe(
+      map((pageCount) => {
+        return this.courseService.getCourses(pageCount);
+      }))
+      .switch()
+      .subscribe((data) => {
       this.coursesList = this.coursesList.concat(data.map(element => this.createCourseItem(element)));
     });
   }
@@ -87,11 +86,11 @@ export class CourseListComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   public onCourseUploadClick(): void {
-    this.dynamicCourseUpload.next(++this.pageCount);
+    this.dynamicCourseUpload.next(Number(this.pageCount));
   }
 
   public onDelete(event: number): void {
-    this.dialogRef = this.dialog.open(OnDeleteDialogComponent, {height: '350px', width: '350px'});
+    this.dialogRef = this.dialog.open(OnDeleteDialogComponent, {height: '10rem', width: '10rem'});
     this.deleteCourseSubscription = this.dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.courseService.removeItem(event)

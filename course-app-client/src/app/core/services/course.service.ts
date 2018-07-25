@@ -1,19 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
+import { ReplaySubject } from 'rxjs';
+import { Observable } from 'rxjs';
+
 import { COURSELIST } from '../../shared/mocks/mock-courses';
 import { CourseItem } from '../../shared/interfaces/course.interface';
 import { CourseData } from '../../shared/interfaces/course-data.interface';
-
-import { ReplaySubject } from 'rxjs';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/operator/filter';
-import 'rxjs/add/operator/map';
+import { BASE_URL } from '../../shared/constants/path-config';
 
 @Injectable()
 export class CourseService {
   private http: HttpClient;
-  private baseUrl: string = 'http://localhost:3004';
+  private baseUrl: string = BASE_URL;
   public state: string;
   public courseSubject: ReplaySubject<Array<CourseData>> = new ReplaySubject();
 

@@ -1,16 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
+import { ReplaySubject } from 'rxjs';
+import { Observable } from 'rxjs';
+
 import { LocalStorageService } from './local-storage.service';
 import { Credentials } from '../../shared/interfaces/credentials';
-import { ReplaySubject } from 'rxjs';
-import { Observable } from 'rxjs/Observable';
+import { BASE_URL } from '../../shared/constants/path-config';
 
 @Injectable()
 export class AuthService {
   private localStorageService: LocalStorageService;
   private http: HttpClient;
-  private baseUrl: string = 'http://localhost:3004';
+  private baseUrl: string = BASE_URL;
   public isAuthenticatedSubject: ReplaySubject<Credentials> = new ReplaySubject();
 
   constructor(
