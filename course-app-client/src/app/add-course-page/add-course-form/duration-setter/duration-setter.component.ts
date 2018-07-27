@@ -16,7 +16,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 export class DurationSetterComponent implements ControlValueAccessor {
   @Input()
-  public _durationSetterValue: number;
+  public pureDurationSetterValue: number;
 
   @Input()
   public isTouched: boolean;
@@ -25,17 +25,17 @@ export class DurationSetterComponent implements ControlValueAccessor {
   public isValid: boolean;
 
   public get durationSetterValue(): number {
-    return this._durationSetterValue;
+    return this.pureDurationSetterValue;
   }
 
   public set durationSetterValue(value: number) {
-    this._durationSetterValue = value;
-    this.propagateChange(this._durationSetterValue);
+    this.pureDurationSetterValue = value;
+    this.propagateChange(this.pureDurationSetterValue);
   }
 
   public writeValue(value: number): void {
     if (value !== undefined) {
-      this._durationSetterValue = value;
+      this.pureDurationSetterValue = value;
     }
   }
 
@@ -52,6 +52,6 @@ export class DurationSetterComponent implements ControlValueAccessor {
   }
 
   public onInputChange(event): void {
-    this.durationSetterValue = event.target.value;    
+    this.durationSetterValue = event.target.value;
   }
 }

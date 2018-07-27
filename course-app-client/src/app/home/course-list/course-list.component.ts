@@ -7,8 +7,7 @@ import {
 } from '@angular/core';
 
 import { Subscription, ReplaySubject, pipe } from 'rxjs';
-import { map } from 'rxjs/operators';
-import 'rxjs/add/operator/switch';
+import { switchMap } from 'rxjs/operators';
 
 import { MatDialog } from '@angular/material';
 import { MatDialogRef } from '@angular/material';
@@ -28,7 +27,6 @@ import { CourseSearchPipe } from '../../core/pipes/course-search.pipe';
     CourseSearchPipe,
   ]
 })
-
 export class CourseListComponent implements OnInit, OnChanges, OnDestroy {
   private pageCount: number;
   public coursesList: Array<CourseItem> = [];
@@ -66,10 +64,7 @@ export class CourseListComponent implements OnInit, OnChanges, OnDestroy {
         return this.createCourseItem(element);
       }));
     this.dynamicCourseUpload.pipe(
-      map((pageCount) => {
-        return this.courseService.getCourses(pageCount);
-      }))
-      .switch()
+      switchMap(pageCount => this.courseService.getCourses(pageCount)))
       .subscribe((data) => {
       this.coursesList = this.coursesList.concat(data.map(element => this.createCourseItem(element)));
     });

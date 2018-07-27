@@ -2,7 +2,7 @@
   <div class="chooser-header">Authors</div>
   <div class="chooser" [ngClass]="{'red-border': !isValid && isTouched}">
     <ul class="chooser-list">
-      <li *ngFor="let author of authors">
+      <li *ngFor="let author of getAuthors | async ">
         <input
           type="checkbox"
           (click)="propagateTouch()"

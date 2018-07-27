@@ -6,7 +6,7 @@ import {
   OnDestroy
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { CreateAuthor } from '../../../shared/interfaces/create-author.interface';
 import { FetchAuthorService } from '../../../core/services/fetch-author.service';
@@ -23,8 +23,8 @@ import { FetchAuthorService } from '../../../core/services/fetch-author.service'
     }
   ]
 })
-export class ChooserComponent implements ControlValueAccessor, OnInit, OnDestroy {
-  private getAuthorsSub: Subscription;
+export class ChooserComponent implements ControlValueAccessor, OnInit {
+  public getAuthors: Observable<CreateAuthor>;
   public fetchAuthorService: FetchAuthorService;
   public authors: CreateAuthor;
 
@@ -33,34 +33,28 @@ export class ChooserComponent implements ControlValueAccessor, OnInit, OnDestroy
 
   @Input()
   public isTouched: boolean;
-  
+
   @Input()
-  public _chooserValue: string[] = [];
+  public pureChooserValue: string[] = [];
 
   constructor(fetchAuthorService: FetchAuthorService) {
     this.fetchAuthorService = fetchAuthorService;
   }
 
   public ngOnInit(): void {
-    this.getAuthorsSub = this.fetchAuthorService.getAuthors().subscribe(data => {
-      this.authors = data;
-    });
-  }
-
-  public ngOnDestroy(): void {
-    this.getAuthorsSub.unsubscribe();
+    this.getAuthors = this.fetchAuthorService.getAuthors();
   }
 
   public get chooserValue(): string[] {
-    return this._chooserValue;
+    return this.pureChooserValue;
   }
 
   public set chooserValue(value: string[]) {
-    this._chooserValue = value;
-    this.propagateChange(this._chooserValue);
+    this.pureChooserValue = value;
+    this.propagateChange(this.pureChooserValue);
   }
 
-  public writeValue(value: null | string[]): void {    
+  public writeValue(value: null | string[]): void {
     if (value !== undefined && value !== null) {
       this.chooserValue = value;
     } else {
@@ -83,10 +77,10 @@ export class ChooserComponent implements ControlValueAccessor, OnInit, OnDestroy
   public onCheckboxChange(author: CreateAuthor): void {
     author.checked = !author.checked;
     if (author.checked) {
-      this._chooserValue.push(author.name);
-      this.chooserValue = this._chooserValue;
+      this.pureChooserValue.push(author.name);
+      this.chooserValue = this.pureChooserValue;
     } else {
-      this.chooserValue = this._chooserValue.filter(item => item !== author.name);
+      this.chooserValue = this.pureChooserValue.filter(item => item !== author.name);
     }
   }
 }

@@ -19,7 +19,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class DatePickerComponent implements ControlValueAccessor {
   @Input()
-  public _datePickerValue: string = '';
+  public pureDatePickerValue: string = '';
 
   @Input()
   public isTouched: boolean;
@@ -28,12 +28,12 @@ export class DatePickerComponent implements ControlValueAccessor {
   public isValid: boolean;
 
   public get datePickerValue(): string {
-    return this._datePickerValue;
+    return this.pureDatePickerValue;
   }
 
   public set datePickerValue(value: string) {
-    this._datePickerValue = value;
-    this.propagateChange(this._datePickerValue);
+    this.pureDatePickerValue = value;
+    this.propagateChange(this.pureDatePickerValue);
   }
 
   public writeValue(value: string): void {
