@@ -1,5 +1,5 @@
 <main class="form-main">
-  <form action="" [formGroup]="courseForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="courseForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="title" class="form-label">Title</label>
         <input
@@ -10,11 +10,11 @@
           formControlName="title"
           maxlength="50">
           <div *ngIf="courseForm.controls.title.errors">
-            <div
+            <span
               *ngIf="courseForm.controls.title.errors.required
               && courseForm.controls.title.touched">
-              this field is required!
-            </div>
+              this field is required
+            </span>
           </div>
     </div>
     <div class="form-group">
@@ -27,11 +27,11 @@
           [ngClass]="{'red-border': courseForm.controls.description.errors && courseForm.controls.description.touched}"
           formControlName="description"></textarea>
           <div *ngIf="courseForm.controls.description.errors">
-              <div
+              <span
                 *ngIf="courseForm.controls.description.errors.required
                 && courseForm.controls.description.touched">
-                this field is required!
-              </div>
+                this field is required
+              </span>
           </div>
     </div>
     <div class="form-group">
@@ -41,12 +41,12 @@
         [isValid]="courseForm.controls.date.valid">
       </date-picker>
       <div *ngIf="courseForm.controls.date.errors">
-        <div *ngIf="courseForm.controls.date.errors.required && courseForm.controls.date.touched">
+        <span *ngIf="courseForm.controls.date.errors.required && courseForm.controls.date.touched">
           this field is required
-        </div>
-        <div *ngIf="!courseForm.controls.date.errors.validateDate.valid && courseForm.controls.date.touched && !courseForm.controls.date.errors.required">
+        </span>
+        <span *ngIf="!courseForm.controls.date.errors.validateDate.valid && courseForm.controls.date.touched && !courseForm.controls.date.errors.required">
           date format is incorrect
-        </div>
+        </span>
       </div>
     </div>
     <div class="form-group">
@@ -56,12 +56,12 @@
         [isValid]="courseForm.controls.duration.valid">
       </duration-setter>
       <div *ngIf="courseForm.controls.duration.errors">
-        <div *ngIf="courseForm.controls.duration.errors.required && courseForm.controls.duration.touched">
+        <span *ngIf="courseForm.controls.duration.errors.required && courseForm.controls.duration.touched">
             this field is required
-        </div>
-        <div *ngIf="courseForm.controls.duration.errors.pattern && courseForm.controls.duration.touched && !courseForm.controls.duration.errors.required">
+        </span>
+        <span *ngIf="courseForm.controls.duration.errors.pattern && courseForm.controls.duration.touched && !courseForm.controls.duration.errors.required">
           only numbers
-        </div>
+        </span>
       </div>
     </div>
     <div class="form-group">
@@ -71,13 +71,13 @@
         [isTouched]="courseForm.controls.authors.touched">
       </chooser>
       <div *ngIf="courseForm.controls.authors.errors">
-        <div *ngIf="courseForm.controls.authors.errors.required && courseForm.controls.authors.touched">
+        <span *ngIf="courseForm.controls.authors.errors.required && courseForm.controls.authors.touched">
           this field id required
-        </div>
+        </span>
       </div>
     </div>
     <div class="btn-group">
-      <button type="submit" [disabled]="!courseForm.valid">Save</button>
+      <button type="submit" [disabled]="courseForm.invalid">Save</button>
       <button (click)="onCancel()">Cancel</button>
     </div>
 </form>
