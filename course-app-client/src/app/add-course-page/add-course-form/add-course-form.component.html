@@ -1,20 +1,84 @@
 <main class="form-main">
-  <div class="form-group">
-    <label for="title" class="form-label">Title</label>
-    <mat-form-field class="input-item">
-      <input matInput type="text" id="title" placeholder="Text input">
-    </mat-form-field>
-  </div>
-  <div class="form-group">
-    <label for="description" class="form-label">Description</label>
-    <mat-form-field class="input-item">
-      <textarea matInput  id="description" placeholder="Text area"></textarea>
-    </mat-form-field>
-  </div>
-  <date-picker></date-picker>
-  <duration-setter></duration-setter>
-  <div class="btn-group">
-    <button (click)="onSave()" mat-raised-button color="primary">Save</button>
-    <button (click)="onCancel()" mat-raised-button color="warn">Cancel</button>
-  </div>
+  <form [formGroup]="courseForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="title" class="form-label">Title</label>
+        <input
+          type="text"
+          [ngClass]="{'red-border': courseForm.controls.title.errors && courseForm.controls.title.touched}"
+          id="title"
+          placeholder="Text input"
+          formControlName="title"
+          maxlength="50">
+          <div *ngIf="courseForm.controls.title.errors">
+            <span
+              *ngIf="courseForm.controls.title.errors.required
+              && courseForm.controls.title.touched">
+              this field is required
+            </span>
+          </div>
+    </div>
+    <div class="form-group">
+      <label for="description"
+        class="form-label">
+        Description</label>
+        <textarea id="description"
+          placeholder="Text area"
+          maxlength="50"
+          [ngClass]="{'red-border': courseForm.controls.description.errors && courseForm.controls.description.touched}"
+          formControlName="description"></textarea>
+          <div *ngIf="courseForm.controls.description.errors">
+              <span
+                *ngIf="courseForm.controls.description.errors.required
+                && courseForm.controls.description.touched">
+                this field is required
+              </span>
+          </div>
+    </div>
+    <div class="form-group">
+      <date-picker
+        formControlName="date"
+        [isTouched]="courseForm.controls.date.touched"
+        [isValid]="courseForm.controls.date.valid">
+      </date-picker>
+      <div *ngIf="courseForm.controls.date.errors">
+        <span *ngIf="courseForm.controls.date.errors.required && courseForm.controls.date.touched">
+          this field is required
+        </span>
+        <span *ngIf="!courseForm.controls.date.errors.validateDate.valid && courseForm.controls.date.touched && !courseForm.controls.date.errors.required">
+          date format is incorrect
+        </span>
+      </div>
+    </div>
+    <div class="form-group">
+        <duration-setter
+        formControlName="duration"
+        [isTouched]="courseForm.controls.duration.touched"
+        [isValid]="courseForm.controls.duration.valid">
+      </duration-setter>
+      <div *ngIf="courseForm.controls.duration.errors">
+        <span *ngIf="courseForm.controls.duration.errors.required && courseForm.controls.duration.touched">
+            this field is required
+        </span>
+        <span *ngIf="courseForm.controls.duration.errors.pattern && courseForm.controls.duration.touched && !courseForm.controls.duration.errors.required">
+          only numbers
+        </span>
+      </div>
+    </div>
+    <div class="form-group">
+      <chooser
+        formControlName="authors"
+        [isValid]="courseForm.controls.authors.valid"
+        [isTouched]="courseForm.controls.authors.touched">
+      </chooser>
+      <div *ngIf="courseForm.controls.authors.errors">
+        <span *ngIf="courseForm.controls.authors.errors.required && courseForm.controls.authors.touched">
+          this field id required
+        </span>
+      </div>
+    </div>
+    <div class="btn-group">
+      <button type="submit" [disabled]="courseForm.invalid">Save</button>
+      <button (click)="onCancel()">Cancel</button>
+    </div>
+</form>
 </main>

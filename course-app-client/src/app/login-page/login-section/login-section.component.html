@@ -1,18 +1,40 @@
 <section class="login-section">
-  <label for="login" class="login-section__label">
-    Login
-    <mat-form-field class="example-full-width">
-      <input matInput
-             [(ngModel)]="currentLogin"
-             id="login">
-    </mat-form-field>
-  </label>
-  <label for="password" class="login-section__label">
-    Password
-    <mat-form-field class="example-full-width">
-      <input matInput placeholder="" [(ngModel)]="currentPassword" type="password" id="password">
-    </mat-form-field>
-  </label>
-
-  <button mat-raised-button (click)="logIn()">Enter</button>
+  <form [formGroup]="authForm" (ngSubmit)="logIn()">
+    <div class="form-group">
+      <label for="login" class="login-section__label">
+        Login
+        <input
+          id="login"
+          formControlName="login"
+          [ngClass]="{'red-border': authForm.controls.login.errors && authForm.controls.login.touched}"
+          type="text">
+      </label>
+      <div *ngIf="!authForm.controls.login.valid">
+        <div *ngIf="authForm.controls.login.errors.required && authForm.controls.login.touched">
+          this field is required
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="password" class="login-section__label">
+        Password
+        <input
+          [ngClass]="{'red-border': authForm.controls.password.errors && authForm.controls.password.touched}"
+          formControlName="password"
+          type="password"
+          id="password">
+      </label>
+      <div *ngIf="!authForm.controls.password.valid">
+        <div *ngIf="authForm.controls.password.errors.required && authForm.controls.password.touched">
+          this field is required
+        </div>
+      </div>
+    </div>
+    <button
+      (click)="logIn()"
+      type="submit"
+      [disabled]="!authForm.valid">
+      Enter
+    </button>
+  </form>
 </section>

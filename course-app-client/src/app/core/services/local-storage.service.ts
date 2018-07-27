@@ -1,11 +1,8 @@
 import { Injectable } from '@angular/core';
 
-import { Credentials } from '../../shared/interfaces/credentials';
-
 @Injectable()
-
 export class LocalStorageService {
-  public loadToken (): string {
+  public loadToken(): string {
     try {
       const token: string = localStorage.getItem('userToken');
       if (token) {
@@ -16,7 +13,7 @@ export class LocalStorageService {
     }
   }
 
-  public storeToken (token: string): void {
+  public storeToken(token: string): void {
     try {
       localStorage.setItem('userToken', token);
     } catch (err) {
@@ -24,7 +21,7 @@ export class LocalStorageService {
     }
   }
 
-  public wipeCredentials (): void {
+  public wipeToken(): void {
     localStorage.removeItem('userToken');
   }
 }

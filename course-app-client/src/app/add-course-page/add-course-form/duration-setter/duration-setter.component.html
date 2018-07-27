@@ -1,7 +1,11 @@
 <div>
   <label for="duration">Duration</label>
-  <mat-form-field>
-    <input matInput type="number" id="duration" placeholder="" [(ngModel)]="duration" (change)="onChange()">
-  </mat-form-field>
-  <span>{{duration}}</span>
+    <input
+      [ngClass]="{'red-border': !isValid && isTouched}"
+      type="text"
+      id="duration"
+      placeholder="duration"
+      [value]="durationSetterValue"
+      (input)="onInputChange($event)"
+      (blur)="propagateTouch()">
 </div>

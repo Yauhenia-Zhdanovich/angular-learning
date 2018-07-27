@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DurationSetterComponent } from './duration-setter.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+
+import { DurationSetterComponent } from './duration-setter.component';
 
 @NgModule({
   imports: [
@@ -19,6 +20,5 @@ import { FormsModule } from '@angular/forms';
     DurationSetterComponent
   ]
 })
-
 export class DurationSetterModule {
 }

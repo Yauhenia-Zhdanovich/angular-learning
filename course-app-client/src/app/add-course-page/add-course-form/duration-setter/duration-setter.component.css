@@ -1,0 +1,17 @@
+.form-group {
+  display: flex;
+  align-items: center;
+  padding-left: 1rem;
+  width: 100%;
+  min-height: 3rem;
+}
+
+.form-label {
+  align-self: center;
+  margin-right: 1rem;
+  text-align: right;
+}
+
+.red-border{
+  border: .05rem solid red;
+}

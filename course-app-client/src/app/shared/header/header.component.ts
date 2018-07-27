@@ -9,7 +9,6 @@ import { AuthService } from '../../core/services/authenticity.service';
   inputs: ['state:passedState'],
   providers: [ AuthService ]
 })
-
 export class HeaderComponent {
   public isAuthorized: boolean;
   public authService: AuthService;
@@ -17,8 +16,4 @@ export class HeaderComponent {
   constructor(authService: AuthService) {
     this.authService = authService;
   }
-
-  //  public ngOnInit(): void {
-  //    this.isAuthorized = this.authService.isAuth();
-  // }
 }

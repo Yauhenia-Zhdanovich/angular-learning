@@ -3,14 +3,15 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { HttpModule, Http, XHRBackend, RequestOptions } from '@angular/http';
+import { ReactiveFormsModule } from '@angular/forms';
+import { httpInterceptorProviders } from './core/interceptors';
 
+import { AuthService } from './core/services/authenticity.service';
 import { AppComponent } from './app.component';
-import { HomeComponentModule } from './home';
-import { LoginPageModule } from './login-page';
-import { LocalStorageService } from './core/services/local-storage.service';
 import { AddCoursePageModule } from './add-course-page';
-import { HttpService } from './core/services/secureHttp.service';
+import { LocalStorageService } from './core/services/local-storage.service';
+import { LoginPageModule } from './login-page';
+import { HomeComponentModule } from './home';
 
 @NgModule({
   declarations: [
@@ -24,17 +25,13 @@ import { HttpService } from './core/services/secureHttp.service';
     LoginPageModule,
     AddCoursePageModule,
     BrowserAnimationsModule,
-    HttpModule
+    ReactiveFormsModule
   ],
   providers: [
     LocalStorageService,
-    {
-      provide: HttpService,
-      useFactory: (backend: XHRBackend, options: RequestOptions) => {
-        return new HttpService(backend, options);
-      },
-      deps: [XHRBackend, RequestOptions]
-    }],
+    httpInterceptorProviders,
+    AuthService
+  ],
   bootstrap: [ AppComponent ]
 })
-export class AppModule { }
+export class AppModule {}

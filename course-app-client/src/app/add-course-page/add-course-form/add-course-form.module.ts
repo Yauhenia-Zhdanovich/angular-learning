@@ -1,10 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AddCourseFormComponent } from './add-course-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
+
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+
 import { DatePickerModule } from './date-picker';
 import { DurationSetterModule } from './duration-setter';
+import { ChooserModule } from './chooser';
+import { AddCourseFormComponent } from './add-course-form.component';
 
 @NgModule({
   imports: [
@@ -12,7 +16,9 @@ import { DurationSetterModule } from './duration-setter';
     MatButtonModule,
     MatInputModule,
     DatePickerModule,
-    DurationSetterModule
+    DurationSetterModule,
+    ReactiveFormsModule,
+    ChooserModule
   ],
   declarations: [
     AddCourseFormComponent
@@ -21,6 +27,5 @@ import { DurationSetterModule } from './duration-setter';
     AddCourseFormComponent,
   ]
 })
-
 export class AddCourseFormModule {
 }
