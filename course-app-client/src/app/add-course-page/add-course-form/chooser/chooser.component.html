@@ -10,6 +10,24 @@
           (change)="onCheckboxChange(author)">
         <span>{{author.name}}</span>
       </li>
-    </ul>  
+    </ul>
+  </div>
+</div>
+<div>
+  <div>
+
+  </div>
+  <div>
+    <ul class="chooser-list">
+      <li *ngFor="let author of getAuthors | async ">
+        <!--<input-->
+          <!--type="checkbox"-->
+          <!--(click)="propagateTouch()"-->
+          <!--[checked]="author.checked"-->
+          <!--(change)="onCheckboxChange(author)">-->
+        <span>{{author.name}}</span>
+        <button>+</button>
+      </li>
+    </ul>
   </div>
 </div>

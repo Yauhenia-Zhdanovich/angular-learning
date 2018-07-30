@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 
 import { CreateAuthor } from '../../../shared/interfaces/create-author.interface';
 import { FetchAuthorService } from '../../../core/services/fetch-author.service';
+import { subscribeOn } from '../../../../../node_modules/rxjs/operator/subscribeOn';
 
 @Component({
   selector: 'chooser',
@@ -43,6 +44,8 @@ export class ChooserComponent implements ControlValueAccessor, OnInit {
 
   public ngOnInit(): void {
     this.getAuthors = this.fetchAuthorService.getAuthors();
+    console.log(this.pureChooserValue);
+    // this.getAuthors.subscribe(data => console.log(data));
   }
 
   public get chooserValue(): string[] {

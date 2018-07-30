@@ -6,12 +6,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { httpInterceptorProviders } from './core/interceptors';
 
+import { AppRoutingModule } from "./app-routing.module";
 import { AuthService } from './core/services/authenticity.service';
 import { AppComponent } from './app.component';
 import { AddCoursePageModule } from './add-course-page';
 import { LocalStorageService } from './core/services/local-storage.service';
 import { LoginPageModule } from './login-page';
 import { HomeComponentModule } from './home';
+import { NotFoundModule } from "./not-found";
 
 @NgModule({
   declarations: [
@@ -21,11 +23,13 @@ import { HomeComponentModule } from './home';
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    AppRoutingModule,
     HomeComponentModule,
     LoginPageModule,
     AddCoursePageModule,
-    BrowserAnimationsModule,
-    ReactiveFormsModule
+    NotFoundModule
   ],
   providers: [
     LocalStorageService,

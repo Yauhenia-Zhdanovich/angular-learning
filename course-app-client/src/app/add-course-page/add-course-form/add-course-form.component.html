@@ -23,7 +23,7 @@
         Description</label>
         <textarea id="description"
           placeholder="Text area"
-          maxlength="50"
+          maxlength="500"
           [ngClass]="{'red-border': courseForm.controls.description.errors && courseForm.controls.description.touched}"
           formControlName="description"></textarea>
           <div *ngIf="courseForm.controls.description.errors">
@@ -78,7 +78,7 @@
     </div>
     <div class="btn-group">
       <button type="submit" [disabled]="courseForm.invalid">Save</button>
-      <button (click)="onCancel()">Cancel</button>
+      <button (click)="onCancel()" [routerLink]="routesConfig.homeAbsolutePath">Cancel</button>
     </div>
 </form>
 </main>

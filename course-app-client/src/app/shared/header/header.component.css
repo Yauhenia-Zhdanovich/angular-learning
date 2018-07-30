@@ -4,14 +4,18 @@
   border: .05rem solid #aaa;
   border-radius: .1rem;
 }
+
 .logo-image {
   width: 7rem;
   height: auto;
 }
+
 .logo-wrapper {
   display: flex;
   align-items: flex-start;
+  cursor: pointer;
 }
+
 .logo-text {
   align-self: center;
 }

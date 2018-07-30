@@ -19,7 +19,12 @@
     </mat-card-content>
   </section>
   <div class="course-button-group">
-    <button mat-raised-button class="course-button">Edit</button>
+    <button
+      mat-raised-button
+      class="course-button"
+      (click)="navigateToEdit(course.id)">
+      Edit
+    </button>
     <button mat-raised-button
             (click)="onDelete(course.id)"
             class="course-button">

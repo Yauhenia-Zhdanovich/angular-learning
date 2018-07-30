@@ -40,6 +40,11 @@ export class CourseService {
         });
   }
 
+  public getSpecificCourse(id: string) {
+    // const urlParams: HttpParams = new HttpParams();
+    return this.http.get(`${this.baseUrl}/courses/${id}`);
+  }
+
   public createCourse(course: CourseItem ): void {
     COURSELIST.push(course);
   }

@@ -75,9 +75,11 @@ export class CourseListComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this.courseSubscriber.unsubscribe();
+    if (this.deleteCourseSubscription) {
+      this.deleteCourseSubscription.unsubscribe();
+    }
     this.dynamicCourseUpload.unsubscribe();
-    this.deleteCourseSubscription.unsubscribe();
+    this.courseSubscriber.unsubscribe();
   }
 
   public onCourseUploadClick(): void {
