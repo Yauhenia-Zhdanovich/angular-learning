@@ -2,13 +2,14 @@
   <div class="chooser-header">Authors</div>
   <div class="chooser" [ngClass]="{'red-border': !isValid && isTouched}">
     <ul class="chooser-list">
-      <li *ngFor="let author of getAuthors | async ">
-        <input
+      <li *ngFor="let author of pureChooserValue ">
+        <!-- <input
           type="checkbox"
           (click)="propagateTouch()"
           [checked]="author.checked"
-          (change)="onCheckboxChange(author)">
-        <span>{{author.name}}</span>
+          (change)="onCheckboxChange(author)"> -->
+        <span>{{author}}</span>
+        <span (click)="onMinusClick(author)">-</span>
       </li>
     </ul>
   </div>
@@ -25,8 +26,8 @@
           <!--(click)="propagateTouch()"-->
           <!--[checked]="author.checked"-->
           <!--(change)="onCheckboxChange(author)">-->
-        <span>{{author.name}}</span>
-        <button>+</button>
+        <span>{{author}}</span>
+        <span (click)="onPlusClick(author)">+</span>
       </li>
     </ul>
   </div>

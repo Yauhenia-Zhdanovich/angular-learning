@@ -36,7 +36,7 @@ export class ChooserComponent implements ControlValueAccessor, OnInit {
   public isTouched: boolean;
 
   @Input()
-  public pureChooserValue: string[] = [];
+  public pureChooserValue: any[] = [];
 
   constructor(fetchAuthorService: FetchAuthorService) {
     this.fetchAuthorService = fetchAuthorService;
@@ -85,5 +85,18 @@ export class ChooserComponent implements ControlValueAccessor, OnInit {
     } else {
       this.chooserValue = this.pureChooserValue.filter(item => item !== author.name);
     }
+  }
+
+  public onPlusClick(author: string): void {
+    if (this.chooserValue.indexOf(author) > 0) {
+      return;
+    }
+    this.pureChooserValue.push(author);
+    this.chooserValue = this.pureChooserValue;
+    console.log(this.chooserValue);
+  }
+
+  public onMinusClick(author: string): void {
+    this.chooserValue = this.chooserValue.filter(element => element !== author);
   }
 }

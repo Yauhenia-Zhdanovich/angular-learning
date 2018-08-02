@@ -55,8 +55,7 @@ export class AddCourseFormComponent implements OnInit {
 
   private parseFetchedAuthors(data: any): any {
     return data.map(element => {
-      return {
-        name: `${element.firstName} ${element.lastName}`};
+      return `${element.firstName} ${element.lastName}`;
     });
   }
 
