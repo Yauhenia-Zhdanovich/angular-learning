@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { AuthService } from '../../core/services/authenticity.service';
-import { RoutesConfig } from '../../../../app-config/routes/routes.config';
+import { ROUTES_CONFIG } from '../../../../app-config/routes/routes.config';
 
 @Component({
   selector: 'page-header',
@@ -11,7 +11,7 @@ import { RoutesConfig } from '../../../../app-config/routes/routes.config';
   providers: [ AuthService ]
 })
 export class HeaderComponent {
-  public routesConfig = RoutesConfig;
+  public routesConfig = ROUTES_CONFIG;
   public isAuthorized: boolean;
   public authService: AuthService;
 

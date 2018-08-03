@@ -24,6 +24,18 @@ export class DurationSetterComponent implements ControlValueAccessor {
   @Input()
   public isValid: boolean;
 
+  private propagateChange = (_: number) => {}
+
+  private propagateTouch = () => {}
+
+  public registerOnChange(fn): void {
+    this.propagateChange = fn;
+  }
+
+  public registerOnTouched(fn): void {
+    this.propagateTouch = fn;
+  }
+  
   public get durationSetterValue(): number {
     return this.pureDurationSetterValue;
   }
@@ -37,18 +49,6 @@ export class DurationSetterComponent implements ControlValueAccessor {
     if (value !== undefined) {
       this.pureDurationSetterValue = value;
     }
-  }
-
-  public propagateChange = (_: any) => {}
-
-  public registerOnChange(fn): void {
-    this.propagateChange = fn;
-  }
-
-  public propagateTouch = (_: string) => {}
-
-  public registerOnTouched(fn): void {
-    this.propagateTouch = fn;
   }
 
   public onInputChange(event): void {

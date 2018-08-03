@@ -72,13 +72,13 @@
       </chooser>
       <div *ngIf="courseForm.controls.authors.errors">
         <span *ngIf="courseForm.controls.authors.errors.required && courseForm.controls.authors.touched">
-          this field id required
+          this field is required
         </span>
       </div>
     </div>
     <div class="btn-group">
       <button type="submit" [disabled]="courseForm.invalid">Save</button>
-      <button (click)="onCancel()" [routerLink]="routesConfig.homeAbsolutePath">Cancel</button>
+      <a [routerLink]="routesConfig.homeAbsolutePath">Cancel</a>
     </div>
 </form>
 </main>

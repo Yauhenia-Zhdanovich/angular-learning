@@ -1,1 +1,1 @@
-export * from "./authorization.module";
+export * from './authorization.module';

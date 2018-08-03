@@ -3,31 +3,33 @@ import {
   OnInit,
   OnDestroy
 } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 import { AuthService } from '../../../core/services/authenticity.service';
-import { Subscription } from 'rxjs';
+import { ROUTES_CONFIG } from '../../../../../app-config/routes/routes.config';
 
 @Component({
   selector: 'authorization',
   templateUrl: './authorization.component.html',
   styleUrls: ['./authorization.component.css'],
 })
-export class AuthorizationComponent implements OnInit, OnDestroy {
-  private authServiceSub: Subscription;
+export class AuthorizationComponent implements OnInit {
+  private activatedRoute: ActivatedRoute;
+  public routesConfig = ROUTES_CONFIG;
   public authService: AuthService;
+  public isComponentWillBeShown: boolean;
 
-  constructor(authService: AuthService) {
+  constructor(
+    authService: AuthService,
+    activatedRoute: ActivatedRoute
+  ) {
+    this.activatedRoute = activatedRoute;
     this.authService = authService;
   }
 
   public ngOnInit(): void {
-    this.authServiceSub = this.authService.isAuthenticatedSubject.subscribe((cred): void => {
-      console.log(cred, 'from auth component');
-    });
-  }
-
-  public ngOnDestroy(): void {
-    this.authServiceSub.unsubscribe();
+    this.isComponentWillBeShown = !(this.activatedRoute.routeConfig.path === ROUTES_CONFIG.login);
   }
 
   public logOff(): void {

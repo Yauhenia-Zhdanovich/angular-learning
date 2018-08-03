@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 import { ReplaySubject } from 'rxjs';
 import { Observable } from 'rxjs';
@@ -7,18 +8,22 @@ import { Observable } from 'rxjs';
 import { LocalStorageService } from './local-storage.service';
 import { Credentials } from '../../shared/interfaces/credentials';
 import { BASE_URL } from '../../shared/constants/path-config';
+import { ROUTES_CONFIG } from '../../../../app-config/routes/routes.config';
 
 @Injectable()
 export class AuthService {
+  private router: Router;
   private localStorageService: LocalStorageService;
   private http: HttpClient;
   private baseUrl: string = BASE_URL;
-  public isAuthenticatedSubject: ReplaySubject<Credentials> = new ReplaySubject();
+  public isAuthenticatedSubject: ReplaySubject<boolean> = new ReplaySubject();
 
   constructor(
     localStorageService: LocalStorageService,
-    http: HttpClient
+    http: HttpClient,
+    router: Router
   ) {
+    this.router = router;
     this.localStorageService = localStorageService;
     this.http = http;
   }
@@ -32,13 +37,19 @@ export class AuthService {
     let token: string;
     const urlParams: HttpParams = new HttpParams().set('login', login).set('password', password);
     this.http.request('GET', `${this.baseUrl}/users`, { params: urlParams })
-      .subscribe(data => token = data[0].fakeToken);
-    this.isAuthenticatedSubject.next({login, password});
-    this.localStorageService.storeToken(token);
+      .subscribe(data => {
+        if (data.length) {
+          token = data[0].fakeToken;
+          this.localStorageService.storeToken(token);
+          this.router.navigate([ROUTES_CONFIG.homeAbsolutePath]);
+          this.isAuthenticatedSubject.next(true);
+        } else {
+          this.isAuthenticatedSubject.next(false);
+        }
+      });
   }
 
   public logOut(): void {
-    this.isAuthenticatedSubject.next({login: '', password: ''});
     this.localStorageService.wipeToken();
   }
 

@@ -1,9 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { CourseService } from '../../core/services/course.service';
 import { validateDate } from '../../core/validators/date-validator';
-import { RoutesConfig } from '../../../../app-config/routes/routes.config';
+import { ROUTES_CONFIG } from '../../../../app-config/routes/routes.config';
 import { CourseData } from '../../shared/interfaces/course-data.interface';
 
 @Component({
@@ -15,18 +16,21 @@ export class AddCourseFormComponent implements OnInit {
   private formBuilder: FormBuilder;
   private courseService: CourseService;
   private currentTitle: string = '';
+  private router: Router;
   public courseForm: FormGroup;
-  public routesConfig = RoutesConfig;
+  public routesConfig = ROUTES_CONFIG;
 
   @Input()
   public courseId: string;
 
   constructor(
     formBuilder: FormBuilder,
-    courseService: CourseService
+    courseService: CourseService,
+    router: Router
   ) {
     this.courseService = courseService;
     this.formBuilder = formBuilder;
+    this.router = router;
     this.createForm();
   }
 
@@ -41,15 +45,18 @@ export class AddCourseFormComponent implements OnInit {
   }
 
   private loadCourseData(id: string): void {
-    this.courseService.getSpecificCourse(id).subscribe((data: CourseData) => {
-      this.courseForm.setValue({
+    this.courseService.getSpecificCourse(id).subscribe(
+      (data: CourseData) => {
+        this.courseForm.setValue({
         title: data.name,
         description: data.description,
         date: data.date,
         duration: data.length,
         authors: this.parseFetchedAuthors(data.authors)
       });
-      console.log(this.courseForm.value);
+    },
+      (err: Error) => {
+      this.router.navigate([this.routesConfig.notFound]);
     });
   }
 
@@ -66,10 +73,7 @@ export class AddCourseFormComponent implements OnInit {
   }
 
   public onSubmit(): void {
-    console.log('form was submitted');
-  }
-
-  public onCancel(): void {
-    console.log('canceled');
+    console.log('form was submitted', this.courseForm.value);
+    this.router.navigate([this.routesConfig.homeRelativePath]);
   }
 }

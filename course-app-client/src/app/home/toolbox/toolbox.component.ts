@@ -3,7 +3,7 @@ import {
 } from '@angular/core';
 
 import { CourseService } from '../../core/services/course.service';
-import { RoutesConfig } from '../../../../app-config/routes/routes.config';
+import { ROUTES_CONFIG } from '../../../../app-config/routes/routes.config';
 
 @Component({
   selector: 'toolbox',
@@ -12,7 +12,7 @@ import { RoutesConfig } from '../../../../app-config/routes/routes.config';
 })
 export class ToolboxComponent {
   private courseService: CourseService;
-  public routesConfig = RoutesConfig;
+  public routesConfig = ROUTES_CONFIG;
   public courseName: string;
 
   constructor(courseService: CourseService) {

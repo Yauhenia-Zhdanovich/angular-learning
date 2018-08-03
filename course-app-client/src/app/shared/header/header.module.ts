@@ -4,12 +4,14 @@ import { RouterModule } from '@angular/router';
 
 import { HeaderComponent } from './header.component';
 import { AuthorizationComponentModule } from './authorization';
+import { NavigationModule } from './navigation';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
-    AuthorizationComponentModule
+    AuthorizationComponentModule,
+    NavigationModule
   ],
   declarations: [
     HeaderComponent

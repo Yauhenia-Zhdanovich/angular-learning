@@ -1,6 +1,7 @@
 .component-border {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   border: .05rem solid #aaa;
   border-radius: .1rem;
 }

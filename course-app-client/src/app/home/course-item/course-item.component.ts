@@ -8,7 +8,7 @@ import {
 import { Router } from '@angular/router';
 
 import { CourseItem } from '../../shared/interfaces/course.interface';
-import { RoutesConfig } from '../../../../app-config/routes/routes.config';
+import { ROUTES_CONFIG } from '../../../../app-config/routes/routes.config';
 
 @Component({
   selector: 'app-course-item',
@@ -18,7 +18,7 @@ import { RoutesConfig } from '../../../../app-config/routes/routes.config';
 export class CourseItemComponent implements OnInit {
   private twoWeeks: number = 86400000 * 14;
   private router: Router;
-  public routesConfig = RoutesConfig;
+  public routesConfig = ROUTES_CONFIG;
   public isFresh: boolean;
 
   @Input()
@@ -45,8 +45,7 @@ export class CourseItemComponent implements OnInit {
     this.itemDeleted.emit(id);
   }
 
-  // TODO this kind of functionality might be relocated to a service
-  public navigateToEdit(id: number) {
-    this.router.navigate([this.routesConfig.homeRelativePath, id])
+  public navigateToEdit(id: number): void {
+    this.router.navigate([this.routesConfig.homeRelativePath, id]);
   }
 }

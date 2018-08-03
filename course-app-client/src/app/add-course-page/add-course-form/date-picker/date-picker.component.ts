@@ -27,6 +27,9 @@ export class DatePickerComponent implements ControlValueAccessor {
   @Input()
   public isValid: boolean;
 
+  private propagateChange = (_: string) => {}
+  private propagateTouch = () => {}
+
   public get datePickerValue(): string {
     return this.pureDatePickerValue;
   }
@@ -42,19 +45,15 @@ export class DatePickerComponent implements ControlValueAccessor {
     }
   }
 
-  public propagateChange = (_: string) => {}
-
   public registerOnChange(fn): void {
     this.propagateChange = fn;
   }
-
-  public propagateTouch = (_: string) => {}
 
   public registerOnTouched(fn): void {
     this.propagateTouch = fn;
   }
 
-  public onInput(event): void {
+  public onInput(event: Event): void {
     this.datePickerValue = event.target.value;
   }
 }

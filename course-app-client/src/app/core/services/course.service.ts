@@ -40,8 +40,7 @@ export class CourseService {
         });
   }
 
-  public getSpecificCourse(id: string) {
-    // const urlParams: HttpParams = new HttpParams();
+  public getSpecificCourse(id: string): Observable<{}> {
     return this.http.get(`${this.baseUrl}/courses/${id}`);
   }
 
