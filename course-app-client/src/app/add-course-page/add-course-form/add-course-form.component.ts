@@ -15,7 +15,6 @@ import { CourseData } from '../../shared/interfaces/course-data.interface';
 export class AddCourseFormComponent implements OnInit {
   private formBuilder: FormBuilder;
   private courseService: CourseService;
-  private currentTitle: string = '';
   private router: Router;
   public courseForm: FormGroup;
   public routesConfig = ROUTES_CONFIG;
@@ -36,7 +35,7 @@ export class AddCourseFormComponent implements OnInit {
 
   private createForm(): void {
     this.courseForm = this.formBuilder.group({
-      title: [this.currentTitle, [Validators.required, Validators.maxLength(50)]],
+      title: ['', [Validators.required, Validators.maxLength(50)]],
       description: ['', [Validators.required, Validators.maxLength(500)]],
       date: ['', [Validators.required, validateDate]],
       duration: [undefined, [Validators.required, Validators.pattern('[0-9]*$')]],

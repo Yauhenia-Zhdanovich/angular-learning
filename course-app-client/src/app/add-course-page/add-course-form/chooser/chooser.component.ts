@@ -2,15 +2,13 @@ import {
   Component,
   OnInit,
   Input,
-  forwardRef,
-  OnDestroy
+  forwardRef
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Observable } from 'rxjs';
 
 import { CreateAuthor } from '../../../shared/interfaces/create-author.interface';
 import { FetchAuthorService } from '../../../core/services/fetch-author.service';
-import { subscribeOn } from '../../../../../node_modules/rxjs/operator/subscribeOn';
 
 @Component({
   selector: 'chooser',
@@ -35,15 +33,15 @@ export class ChooserComponent implements ControlValueAccessor, OnInit {
   public isTouched: boolean;
 
   @Input()
-  public pureChooserValue: any[] = [];
+  public pureChooserValue: string[] = [];
 
   constructor(fetchAuthorService: FetchAuthorService) {
     this.fetchAuthorService = fetchAuthorService;
   }
 
-  private propagateChange = (_: null | string[]) => {}
-  
-  private propagateTouch = () => {}
+  private propagateChange = (_: null | string[]) => {};
+
+  private propagateTouch = () => {};
 
   public registerOnChange(fn: any): void {
     this.propagateChange = fn;
@@ -77,12 +75,11 @@ export class ChooserComponent implements ControlValueAccessor, OnInit {
   public onPlusClick(author: string): void {
     this.propagateTouch();
     if (this.chooserValue) {
-      if (this.chooserValue.indexOf(author) > 0) {
-        return;
+      if (this.chooserValue.indexOf(author) < 0) {
+        this.pureChooserValue.push(author);
+        this.chooserValue = this.pureChooserValue;
       }
     }
-    this.pureChooserValue.push(author);
-    this.chooserValue = this.pureChooserValue;
   }
 
   public onMinusClick(author: string): void {

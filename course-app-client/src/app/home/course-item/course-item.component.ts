@@ -44,8 +44,4 @@ export class CourseItemComponent implements OnInit {
   public onDelete(id: number): void {
     this.itemDeleted.emit(id);
   }
-
-  public navigateToEdit(id: number): void {
-    this.router.navigate([this.routesConfig.homeRelativePath, id]);
-  }
 }

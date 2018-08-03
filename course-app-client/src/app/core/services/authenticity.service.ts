@@ -9,6 +9,7 @@ import { LocalStorageService } from './local-storage.service';
 import { Credentials } from '../../shared/interfaces/credentials';
 import { BASE_URL } from '../../shared/constants/path-config';
 import { ROUTES_CONFIG } from '../../../../app-config/routes/routes.config';
+import { User } from '../../shared/interfaces/user.interface';
 
 @Injectable()
 export class AuthService {
@@ -37,7 +38,7 @@ export class AuthService {
     let token: string;
     const urlParams: HttpParams = new HttpParams().set('login', login).set('password', password);
     this.http.request('GET', `${this.baseUrl}/users`, { params: urlParams })
-      .subscribe(data => {
+      .subscribe((data: User[]) => {
         if (data.length) {
           token = data[0].fakeToken;
           this.localStorageService.storeToken(token);
