@@ -1,19 +1,35 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
+import { CourseService } from '../../core/services/course.service';
 import { validateDate } from '../../core/validators/date-validator';
+import { ROUTES_CONFIG } from '../../../../app-config/routes/routes.config';
+import { CourseData } from '../../shared/interfaces/course-data.interface';
 
 @Component({
   selector: 'add-course-form',
   templateUrl: './add-course-form.component.html',
   styleUrls: ['./add-course-from.component.css'],
 })
-export class AddCourseFormComponent {
+export class AddCourseFormComponent implements OnInit {
   private formBuilder: FormBuilder;
+  private courseService: CourseService;
+  private router: Router;
   public courseForm: FormGroup;
+  public routesConfig = ROUTES_CONFIG;
 
-  constructor(formBuilder: FormBuilder) {
+  @Input()
+  public courseId: string;
+
+  constructor(
+    formBuilder: FormBuilder,
+    courseService: CourseService,
+    router: Router
+  ) {
+    this.courseService = courseService;
     this.formBuilder = formBuilder;
+    this.router = router;
     this.createForm();
   }
 
@@ -27,11 +43,36 @@ export class AddCourseFormComponent {
     });
   }
 
-  public onSubmit(): void {
-    console.log('form was submitted');
+  private loadCourseData(id: string): void {
+    this.courseService.getSpecificCourse(id).subscribe(
+      (data: CourseData) => {
+        this.courseForm.setValue({
+        title: data.name,
+        description: data.description,
+        date: data.date,
+        duration: data.length,
+        authors: this.parseFetchedAuthors(data.authors)
+      });
+    },
+      (err: Error) => {
+      this.router.navigate([this.routesConfig.notFound]);
+    });
   }
 
-  public onCancel(): void {
-    console.log('canceled');
+  private parseFetchedAuthors(data: any): any {
+    return data.map(element => {
+      return `${element.firstName} ${element.lastName}`;
+    });
+  }
+
+  public ngOnInit(): void {
+    if (this.courseId) {
+      this.loadCourseData(this.courseId);
+    }
+  }
+
+  public onSubmit(): void {
+    console.log('form was submitted', this.courseForm.value);
+    this.router.navigate([this.routesConfig.homeRelativePath]);
   }
 }

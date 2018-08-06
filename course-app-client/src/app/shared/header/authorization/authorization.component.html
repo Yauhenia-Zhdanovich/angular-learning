@@ -1,4 +1,9 @@
-<div class="authorization-wrapper">
-  <div class="user-login">user login</div>
-  <a href="#" class="user-logoff" (click)="logOff()">logoff</a>
-</div>
+<ng-container *ngIf="isComponentWillBeShown">
+  <div class="authorization-wrapper" *ngIf="authService.isAuth(); else notAuthorized">
+    <div class="user-login">user login</div>
+    <a [routerLink]="routesConfig.homeAbsolutePath" class="user-logoff" (click)="logOff()">logoff</a>
+  </div>
+  <ng-template #notAuthorized>
+    <a [routerLink]="routesConfig.loginAbsolutePath">log in</a>
+  </ng-template>
+</ng-container>

@@ -23,7 +23,7 @@
         Description</label>
         <textarea id="description"
           placeholder="Text area"
-          maxlength="50"
+          maxlength="500"
           [ngClass]="{'red-border': courseForm.controls.description.errors && courseForm.controls.description.touched}"
           formControlName="description"></textarea>
           <div *ngIf="courseForm.controls.description.errors">
@@ -72,13 +72,13 @@
       </chooser>
       <div *ngIf="courseForm.controls.authors.errors">
         <span *ngIf="courseForm.controls.authors.errors.required && courseForm.controls.authors.touched">
-          this field id required
+          this field is required
         </span>
       </div>
     </div>
     <div class="btn-group">
       <button type="submit" [disabled]="courseForm.invalid">Save</button>
-      <button (click)="onCancel()">Cancel</button>
+      <a [routerLink]="routesConfig.homeAbsolutePath">Cancel</a>
     </div>
 </form>
 </main>

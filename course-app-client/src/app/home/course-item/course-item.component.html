@@ -19,7 +19,11 @@
     </mat-card-content>
   </section>
   <div class="course-button-group">
-    <button mat-raised-button class="course-button">Edit</button>
+    <a [routerLink]="[this.routesConfig.homeAbsolutePath, course.id]"
+      mat-raised-button
+      class="course-button">
+      Edit
+    </a>
     <button mat-raised-button
             (click)="onDelete(course.id)"
             class="course-button">

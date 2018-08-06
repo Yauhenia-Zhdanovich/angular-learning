@@ -19,6 +19,7 @@ export class LoginSectionComponent implements OnInit, OnDestroy {
   private authServiceSub: Subscription;
   public authForm: FormGroup;
   public authService: AuthService;
+  public didAuthFailed: boolean = false;
 
   constructor(
     authService: AuthService,
@@ -37,7 +38,12 @@ export class LoginSectionComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
-    this.authServiceSub = this.authService.isAuthenticatedSubject.subscribe();
+    this.authServiceSub = this.authService.isAuthenticatedSubject
+      .subscribe(data => {
+        if (!data) {
+          this.didAuthFailed = true;
+        }
+      });
   }
 
   public logIn(): void {

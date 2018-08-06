@@ -5,22 +5,31 @@ import {
   EventEmitter,
   OnInit
 } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { CourseItem } from '../../shared/interfaces/course.interface';
+import { ROUTES_CONFIG } from '../../../../app-config/routes/routes.config';
 
 @Component({
   selector: 'app-course-item',
   templateUrl: './course-item.component.html',
   styleUrls: ['./course-item.component.css'],
 })
-
 export class CourseItemComponent implements OnInit {
   private twoWeeks: number = 86400000 * 14;
+  private router: Router;
+  public routesConfig = ROUTES_CONFIG;
   public isFresh: boolean;
+
   @Input()
   public course: CourseItem;
 
   @Output()
   public itemDeleted: EventEmitter<number> = new EventEmitter();
+
+  constructor(router: Router) {
+    this.router = router;
+  }
 
   private isFreshCheck(date: Date): boolean {
     let currentDate: number = Date.now();

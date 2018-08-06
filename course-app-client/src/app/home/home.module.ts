@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { HomeComponent } from './home.component';
+import { HomePageComponent } from './home.component';
 import { HeaderModule } from '../shared/header';
 import { FooterModule } from '../shared/footer';
 import { CourseListModule } from './course-list';
@@ -16,10 +16,10 @@ import { ToolboxModule } from './toolbox/toolbox.module';
     ToolboxModule
   ],
   declarations: [
-    HomeComponent
+    HomePageComponent
   ],
   exports: [
-    HomeComponent
+    HomePageComponent
   ],
 })
 

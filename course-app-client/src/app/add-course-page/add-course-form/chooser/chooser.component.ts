@@ -2,14 +2,14 @@ import {
   Component,
   OnInit,
   Input,
-  forwardRef,
-  OnDestroy
+  forwardRef
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Observable } from 'rxjs';
 
 import { CreateAuthor } from '../../../shared/interfaces/create-author.interface';
 import { FetchAuthorService } from '../../../core/services/fetch-author.service';
+import { CustomControl } from '../../../shared/classes/custom-control.model';
 
 @Component({
   selector: 'chooser',
@@ -23,10 +23,9 @@ import { FetchAuthorService } from '../../../core/services/fetch-author.service'
     }
   ]
 })
-export class ChooserComponent implements ControlValueAccessor, OnInit {
+export class ChooserComponent extends CustomControl implements ControlValueAccessor, OnInit {
   public getAuthors: Observable<CreateAuthor>;
   public fetchAuthorService: FetchAuthorService;
-  public authors: CreateAuthor;
 
   @Input()
   public isValid: boolean;
@@ -38,6 +37,7 @@ export class ChooserComponent implements ControlValueAccessor, OnInit {
   public pureChooserValue: string[] = [];
 
   constructor(fetchAuthorService: FetchAuthorService) {
+    super();
     this.fetchAuthorService = fetchAuthorService;
   }
 
@@ -62,25 +62,18 @@ export class ChooserComponent implements ControlValueAccessor, OnInit {
     }
   }
 
-  public propagateChange = (_: null | string[]) => {};
-
-  public registerOnChange(fn: any): void {
-    this.propagateChange = fn;
-  }
-
-  public propagateTouch = (_: string) => {}
-
-  public registerOnTouched(fn: any): void {
-    this.propagateTouch = fn;
-  }
-
-  public onCheckboxChange(author: CreateAuthor): void {
-    author.checked = !author.checked;
-    if (author.checked) {
-      this.pureChooserValue.push(author.name);
-      this.chooserValue = this.pureChooserValue;
-    } else {
-      this.chooserValue = this.pureChooserValue.filter(item => item !== author.name);
+  public onPlusClick(author: string): void {
+    this.propagateTouch();
+    if (this.chooserValue) {
+      if (this.chooserValue.indexOf(author) < 0) {
+        this.pureChooserValue.push(author);
+        this.chooserValue = this.pureChooserValue;
+      }
     }
+  }
+
+  public onMinusClick(author: string): void {
+    this.propagateTouch();
+    this.chooserValue = this.chooserValue.filter(element => element !== author);
   }
 }

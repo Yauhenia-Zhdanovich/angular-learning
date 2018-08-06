@@ -31,10 +31,10 @@
       </div>
     </div>
     <button
-      (click)="logIn()"
       type="submit"
       [disabled]="!authForm.valid">
       Enter
     </button>
   </form>
 </section>
+<div *ngIf="didAuthFailed">login or password was incorrect</div>

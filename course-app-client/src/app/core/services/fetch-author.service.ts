@@ -14,11 +14,8 @@ export class FetchAuthorService {
 
   public getAuthors(): Observable<any> {
     return this.http.get(`${this.baseUrl}/users`).pipe(map((data: any) => {
-      const temp = data.map(item => {
-        return {
-          name: `${item.name.first} ${item.name.last}`,
-          checked: false
-        };
+      const temp: string[] = data.map(item => {
+         return `${item.name.first} ${item.name.last}`;
       });
       return temp;
     }));

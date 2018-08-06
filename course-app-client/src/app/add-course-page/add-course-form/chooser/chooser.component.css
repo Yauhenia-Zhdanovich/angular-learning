@@ -1,5 +1,4 @@
 .chooser {
-  width: 60%;
   background: #fff;
 }
 
@@ -19,4 +18,9 @@
 
 .red-border {
   border: .05rem solid red;
+}
+
+.chooser-btn {
+  cursor: pointer;
+  display: inline-block;
 }

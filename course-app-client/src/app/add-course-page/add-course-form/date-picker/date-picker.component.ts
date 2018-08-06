@@ -5,6 +5,8 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
+import { CustomControl } from '../../../shared/classes/custom-control.model';
+
 @Component({
   selector: 'date-picker',
   templateUrl: './date-picker.component.html',
@@ -17,9 +19,9 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     }
   ]
 })
-export class DatePickerComponent implements ControlValueAccessor {
+export class DatePickerComponent extends CustomControl implements ControlValueAccessor {
   @Input()
-  public pureDatePickerValue: string = '';
+  public pureDatePickerValue: string;
 
   @Input()
   public isTouched: boolean;
@@ -40,18 +42,6 @@ export class DatePickerComponent implements ControlValueAccessor {
     if (value !== undefined) {
       this.datePickerValue = value;
     }
-  }
-
-  public propagateChange = (_: string) => {}
-
-  public registerOnChange(fn): void {
-    this.propagateChange = fn;
-  }
-
-  public propagateTouch = (_: string) => {}
-
-  public registerOnTouched(fn): void {
-    this.propagateTouch = fn;
   }
 
   public onInput(event): void {

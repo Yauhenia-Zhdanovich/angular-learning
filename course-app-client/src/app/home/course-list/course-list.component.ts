@@ -58,7 +58,7 @@ export class CourseListComponent implements OnInit, OnChanges, OnDestroy {
 
   public ngOnInit(): void {
     this.getCourses();
-    this.pageCount = 1;
+    this.pageCount = 2;
     this.courseService.courseSubject
       .subscribe(data => this.coursesList = data.map(element => {
         return this.createCourseItem(element);
@@ -66,7 +66,7 @@ export class CourseListComponent implements OnInit, OnChanges, OnDestroy {
     this.dynamicCourseUpload.pipe(
       switchMap(pageCount => this.courseService.getCourses(pageCount)))
       .subscribe((data) => {
-      this.coursesList = this.coursesList.concat(data.map(element => this.createCourseItem(element)));
+        this.coursesList = this.coursesList.concat(data.map(element => this.createCourseItem(element)));
     });
   }
 
@@ -75,13 +75,16 @@ export class CourseListComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this.courseSubscriber.unsubscribe();
+    if (this.deleteCourseSubscription) {
+      this.deleteCourseSubscription.unsubscribe();
+    }
     this.dynamicCourseUpload.unsubscribe();
-    this.deleteCourseSubscription.unsubscribe();
+    this.courseSubscriber.unsubscribe();
   }
 
   public onCourseUploadClick(): void {
     this.dynamicCourseUpload.next(Number(this.pageCount));
+    this.pageCount += 1;
   }
 
   public onDelete(event: number): void {
