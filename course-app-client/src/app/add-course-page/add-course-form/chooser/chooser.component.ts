@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 
 import { CreateAuthor } from '../../../shared/interfaces/create-author.interface';
 import { FetchAuthorService } from '../../../core/services/fetch-author.service';
+import { CustomControl } from '../../../shared/classes/custom-control.model';
 
 @Component({
   selector: 'chooser',
@@ -22,7 +23,7 @@ import { FetchAuthorService } from '../../../core/services/fetch-author.service'
     }
   ]
 })
-export class ChooserComponent implements ControlValueAccessor, OnInit {
+export class ChooserComponent extends CustomControl implements ControlValueAccessor, OnInit {
   public getAuthors: Observable<CreateAuthor>;
   public fetchAuthorService: FetchAuthorService;
 
@@ -36,19 +37,8 @@ export class ChooserComponent implements ControlValueAccessor, OnInit {
   public pureChooserValue: string[] = [];
 
   constructor(fetchAuthorService: FetchAuthorService) {
+    super();
     this.fetchAuthorService = fetchAuthorService;
-  }
-
-  private propagateChange = (_: null | string[]) => {};
-
-  private propagateTouch = () => {};
-
-  public registerOnChange(fn: any): void {
-    this.propagateChange = fn;
-  }
-
-  public registerOnTouched(fn: any): void {
-    this.propagateTouch = fn;
   }
 
   public ngOnInit(): void {

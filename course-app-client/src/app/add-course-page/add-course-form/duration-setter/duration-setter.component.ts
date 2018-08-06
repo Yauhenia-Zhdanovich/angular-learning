@@ -1,6 +1,8 @@
 import { Component, Input, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
+import { CustomControl } from '../../../shared/classes/custom-control.model';
+
 @Component({
   selector: 'duration-setter',
   templateUrl: './duration-setter.component.html',
@@ -14,7 +16,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   ]
 })
 
-export class DurationSetterComponent implements ControlValueAccessor {
+export class DurationSetterComponent extends CustomControl implements ControlValueAccessor {
   @Input()
   public pureDurationSetterValue: number;
 
@@ -24,18 +26,6 @@ export class DurationSetterComponent implements ControlValueAccessor {
   @Input()
   public isValid: boolean;
 
-  private propagateChange = (_: number) => {}
-
-  private propagateTouch = () => {}
-
-  public registerOnChange(fn): void {
-    this.propagateChange = fn;
-  }
-
-  public registerOnTouched(fn): void {
-    this.propagateTouch = fn;
-  }
-  
   public get durationSetterValue(): number {
     return this.pureDurationSetterValue;
   }
