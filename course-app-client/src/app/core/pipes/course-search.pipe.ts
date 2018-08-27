@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { CourseItem } from '../../shared/interfaces/course.interface';
+import { CourseItem } from '../../shared/interfaces';
 
 @Pipe({name: 'courseSearch'})
 

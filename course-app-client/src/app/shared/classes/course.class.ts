@@ -1,4 +1,4 @@
-import { CourseItem } from '../interfaces/course.interface';
+import { CourseItem } from '../interfaces';
 
 export class Course implements CourseItem {
   public id: number;

@@ -5,7 +5,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { httpInterceptorProviders } from './core/interceptors';
+import { StoreModule } from '@ngrx/store';
 
+import { reducers } from './core/store/reducers';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthService } from './core/services/authenticity.service';
 import { AppComponent } from './app.component';
@@ -18,7 +20,7 @@ import { AuthGuardService } from './core/services/auth-guard.service';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -31,6 +33,7 @@ import { AuthGuardService } from './core/services/auth-guard.service';
     LoginPageModule,
     AddCoursePageModule,
     NotFoundModule,
+    StoreModule.forRoot({})
   ],
   providers: [
     LocalStorageService,

@@ -1,18 +1,18 @@
 <ul>
-  <ng-container *ngIf="!searchValue">
-    <app-course-item *ngFor="let course of coursesList | sortByDate"
-                     [course]="course"
-                     (itemDeleted)="deletedId = $event;onDelete($event)">
-    </app-course-item>
-  </ng-container>
-  <ng-container *ngIf="searchValue">
+  <app-course-item *ngFor="let course of storedCourses | async | sortByDate"
+                    [course]="course"
+                    (itemDeleted)="deletedId = $event;onDelete($event)">
+  </app-course-item>
+  <!-- <ng-tepmlate *ngIf="searchValue">
     <app-course-item *ngFor="let course of filteredList | sortByDate"
                      [course]="course"
                      (itemDeleted)="onDelete($event)">
     </app-course-item>
-  </ng-container>
+  </ng-tepmlate> -->
   <mat-card *ngIf="!coursesList.length" class="no-data">
     No data. Feel free to add new course
   </mat-card>
 </ul>
 <button (click)="onCourseUploadClick()">Show more courses</button>
+
+<div>{{store | async | json}}</div>

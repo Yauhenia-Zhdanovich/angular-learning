@@ -6,10 +6,9 @@ import { ReplaySubject } from 'rxjs';
 import { Observable } from 'rxjs';
 
 import { LocalStorageService } from './local-storage.service';
-import { Credentials } from '../../shared/interfaces/credentials';
+import { Credentials, User } from '../../shared/interfaces';
 import { BASE_URL } from '../../shared/constants/path-config';
 import { ROUTES_CONFIG } from '../../../../app-config/routes/routes.config';
-import { User } from '../../shared/interfaces/user.interface';
 
 @Injectable()
 export class AuthService {

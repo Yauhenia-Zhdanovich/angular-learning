@@ -7,7 +7,7 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Observable } from 'rxjs';
 
-import { CreateAuthor } from '../../../shared/interfaces/create-author.interface';
+import { CreateAuthor } from '../../../shared/interfaces';
 import { FetchAuthorService } from '../../../core/services/fetch-author.service';
 import { CustomControl } from '../../../shared/classes/custom-control.model';
 

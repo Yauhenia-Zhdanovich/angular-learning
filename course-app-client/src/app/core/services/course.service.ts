@@ -5,8 +5,7 @@ import { ReplaySubject } from 'rxjs';
 import { Observable } from 'rxjs';
 
 import { COURSELIST } from '../../shared/mocks/mock-courses';
-import { CourseItem } from '../../shared/interfaces/course.interface';
-import { CourseData } from '../../shared/interfaces/course-data.interface';
+import { CourseItem, CourseData } from '../../shared/interfaces';
 import { BASE_URL } from '../../shared/constants/path-config';
 
 @Injectable()

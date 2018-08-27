@@ -6,7 +6,7 @@ import {
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { AuthService } from '../../core/services/authenticity.service';
-import { Credentials } from '../../shared/interfaces/credentials';
+import { Credentials } from '../../shared/interfaces';
 import { Subscription } from 'rxjs';
 
 @Component({

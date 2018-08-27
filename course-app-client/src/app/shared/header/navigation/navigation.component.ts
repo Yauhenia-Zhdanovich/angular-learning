@@ -7,7 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { CourseService } from '../../../core/services/course.service';
 import { ROUTES_CONFIG } from '../../../../../app-config/routes/routes.config';
-import { CourseData } from '../../../shared/interfaces/course-data.interface';
+import { CourseData } from '../../interfaces';
 import { Subscription } from 'rxjs';
 
 @Component({

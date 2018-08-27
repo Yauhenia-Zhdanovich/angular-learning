@@ -2,19 +2,21 @@ import {
   Component,
   OnInit,
   Input,
-  OnChanges,
   OnDestroy,
 } from '@angular/core';
 
-import { Subscription, ReplaySubject, pipe } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../app.state';
+import * as CourseActions from '../../core/store/actions/course.actions';
+
+import { Subscription, ReplaySubject, pipe, Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 import { MatDialog } from '@angular/material';
 import { MatDialogRef } from '@angular/material';
 
 import { Course } from '../../shared/classes/course.class';
-import { CourseItem } from '../../shared/interfaces/course.interface';
-import { CourseData } from '../../shared/interfaces/course-data.interface';
+import { CourseItem, CourseData } from '../../shared/interfaces';
 import { CourseService } from '../../core/services/course.service';
 import { OnDeleteDialogComponent } from './on-delete-dialog/on-delete-dialog.component';
 import { CourseSearchPipe } from '../../core/pipes/course-search.pipe';
@@ -27,10 +29,13 @@ import { CourseSearchPipe } from '../../core/pipes/course-search.pipe';
     CourseSearchPipe,
   ]
 })
-export class CourseListComponent implements OnInit, OnChanges, OnDestroy {
+export class CourseListComponent implements OnInit, OnDestroy {
   private pageCount: number;
+  // =========================> ngrx 
+  private store: Store<AppState>;
+  // =========================> ngrx 
   public coursesList: Array<CourseItem> = [];
-  public filteredList: Array<CourseItem> = [];
+  // public filteredList: Array<CourseItem> = [];
   public dialog: MatDialog;
   public dialogRef: MatDialogRef<OnDeleteDialogComponent>;
   public courseSearchPipe: CourseSearchPipe;
@@ -39,17 +44,25 @@ export class CourseListComponent implements OnInit, OnChanges, OnDestroy {
   public deleteCourseSubscription: Subscription;
   public dynamicCourseUpload: ReplaySubject<number> = new ReplaySubject();
 
-  @Input('searchValue')
-  public searchValue: string;
+  // ==========================> ngrx
+  public storedCourses: Observable<CourseItem[]>;
+  // ==============================> ngrx 
+  // @Input('searchValue')
+  // public searchValue: string;
 
   constructor(
     courseService: CourseService,
     dialog: MatDialog,
     courseSearchPipe: CourseSearchPipe,
+    store: Store<AppState>
   ) {
     this.courseService = courseService;
     this.courseSearchPipe = courseSearchPipe;
     this.dialog = dialog;
+    this.store = store;
+    this.storedCourses = store.select('courses');
+    console.log(this.storedCourses);
+    
   }
 
   private createCourseItem(element: CourseData): CourseItem {
@@ -60,19 +73,19 @@ export class CourseListComponent implements OnInit, OnChanges, OnDestroy {
     this.getCourses();
     this.pageCount = 2;
     this.courseService.courseSubject
-      .subscribe(data => this.coursesList = data.map(element => {
-        return this.createCourseItem(element);
-      }));
+      .subscribe(data => {
+        this.store.dispatch(new CourseActions.GetCourses(data.map(element => this.createCourseItem(element))));
+      });
     this.dynamicCourseUpload.pipe(
       switchMap(pageCount => this.courseService.getCourses(pageCount)))
       .subscribe((data) => {
-        this.coursesList = this.coursesList.concat(data.map(element => this.createCourseItem(element)));
+        this.store.dispatch(new CourseActions.GetCourses(data.map(element => this.createCourseItem(element))));
     });
   }
 
-  public ngOnChanges(): void {
-    this.filteredList = this.courseSearchPipe.transform(this.coursesList, this.searchValue);
-  }
+  // public ngOnChanges(): void {
+  //   this.filteredList = this.courseSearchPipe.transform(this.coursesList, this.searchValue);
+  // }
 
   public ngOnDestroy(): void {
     if (this.deleteCourseSubscription) {
@@ -99,8 +112,12 @@ export class CourseListComponent implements OnInit, OnChanges, OnDestroy {
 
   public getCourses(): void {
     this.courseSubscriber = this.courseService.getCourses(this.pageCount)
-      .subscribe(data => this.coursesList = data.map(element => {
-        return this.createCourseItem(element);
-      }));
+      .subscribe(data => {
+        const mappedData = data.map(element => {
+          return this.createCourseItem(element);
+        });
+        this.store.dispatch(new CourseActions.GetCourses(mappedData));
+      }
+    );
   }
 }
