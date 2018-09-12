@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { httpInterceptorProviders } from './core/interceptors';
 import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 import { reducers } from './core/store/reducers';
 import { AppRoutingModule } from './app-routing.module';
@@ -33,7 +34,8 @@ import { AuthGuardService } from './core/services/auth-guard.service';
     LoginPageModule,
     AddCoursePageModule,
     NotFoundModule,
-    StoreModule.forRoot({})
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot([])
   ],
   providers: [
     LocalStorageService,

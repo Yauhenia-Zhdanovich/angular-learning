@@ -1,5 +1,5 @@
 <ul>
-  <app-course-item *ngFor="let course of storedCourses | async | sortByDate"
+  <app-course-item *ngFor="let course of coursesList$ | async "
                     [course]="course"
                     (itemDeleted)="deletedId = $event;onDelete($event)">
   </app-course-item>
@@ -7,6 +7,7 @@
     <app-course-item *ngFor="let course of filteredList | sortByDate"
                      [course]="course"
                      (itemDeleted)="onDelete($event)">
+                     | sortByDate
     </app-course-item>
   </ng-tepmlate> -->
   <mat-card *ngIf="!coursesList.length" class="no-data">

@@ -8,6 +8,7 @@ import {
 import { Store } from '@ngrx/store';
 import { AppState } from '../../app.state';
 import * as CourseActions from '../../core/store/actions/course.actions';
+import * as fromStore from '../../core/store';
 
 import { Subscription, ReplaySubject, pipe, Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
@@ -31,9 +32,11 @@ import { CourseSearchPipe } from '../../core/pipes/course-search.pipe';
 })
 export class CourseListComponent implements OnInit, OnDestroy {
   private pageCount: number;
-  // =========================> ngrx 
+  // =========================> ngrx
   private store: Store<AppState>;
-  // =========================> ngrx 
+
+  public coursesList$: Observable<CourseItem[]>;
+  // =========================> ngrx
   public coursesList: Array<CourseItem> = [];
   // public filteredList: Array<CourseItem> = [];
   public dialog: MatDialog;
@@ -46,7 +49,7 @@ export class CourseListComponent implements OnInit, OnDestroy {
 
   // ==========================> ngrx
   public storedCourses: Observable<CourseItem[]>;
-  // ==============================> ngrx 
+  // ==============================> ngrx
   // @Input('searchValue')
   // public searchValue: string;
 
@@ -60,9 +63,6 @@ export class CourseListComponent implements OnInit, OnDestroy {
     this.courseSearchPipe = courseSearchPipe;
     this.dialog = dialog;
     this.store = store;
-    this.storedCourses = store.select('courses');
-    console.log(this.storedCourses);
-    
   }
 
   private createCourseItem(element: CourseData): CourseItem {
@@ -70,17 +70,19 @@ export class CourseListComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
-    this.getCourses();
+    this.coursesList$ = this.store.select(fromStore.getAllCourses);
+    this.store.dispatch(new fromStore.LoadCourses(true))
+    // this.getCourses();
     this.pageCount = 2;
-    this.courseService.courseSubject
-      .subscribe(data => {
-        this.store.dispatch(new CourseActions.GetCourses(data.map(element => this.createCourseItem(element))));
-      });
-    this.dynamicCourseUpload.pipe(
-      switchMap(pageCount => this.courseService.getCourses(pageCount)))
-      .subscribe((data) => {
-        this.store.dispatch(new CourseActions.GetCourses(data.map(element => this.createCourseItem(element))));
-    });
+    // this.courseService.courseSubject
+    //   .subscribe(data => {
+    //     this.store.dispatch(new CourseActions.GetCourses(data.map(element => this.createCourseItem(element))));
+    //   });
+    // this.dynamicCourseUpload.pipe(
+    //   switchMap(pageCount => this.courseService.getCourses(pageCount)))
+    //   .subscribe((data) => {
+    //     this.store.dispatch(new CourseActions.GetCourses(data.map(element => this.createCourseItem(element))));
+    // });
   }
 
   // public ngOnChanges(): void {
@@ -111,13 +113,13 @@ export class CourseListComponent implements OnInit, OnDestroy {
   }
 
   public getCourses(): void {
-    this.courseSubscriber = this.courseService.getCourses(this.pageCount)
-      .subscribe(data => {
-        const mappedData = data.map(element => {
-          return this.createCourseItem(element);
-        });
-        this.store.dispatch(new CourseActions.GetCourses(mappedData));
-      }
-    );
+    // this.courseSubscriber = this.courseService.getCourses(this.pageCount)
+    //   .subscribe(data => {
+    //     const mappedData = data.map(element => {
+    //       return this.createCourseItem(element);
+    //     });
+    //     this.store.dispatch(new CourseActions.GetCourses(mappedData));
+    //   }
+    // );
   }
 }
