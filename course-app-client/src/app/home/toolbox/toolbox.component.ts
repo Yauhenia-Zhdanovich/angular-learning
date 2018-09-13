@@ -21,6 +21,6 @@ export class ToolboxComponent {
   }
 
   public onClickSearch (): void {
-    this.courseService.serverCourseSearch(this.courseName.trim());
+    this.courseService.onSearchAction(this.courseName.trim());
   }
 }

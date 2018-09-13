@@ -28,4 +28,4 @@ export class LoadAuthorSuccess implements Action {
   }
 }
 
-export type
+export type AuthActions = LoadAuthor | LoadAuthorFail | LoadAuthorSuccess;

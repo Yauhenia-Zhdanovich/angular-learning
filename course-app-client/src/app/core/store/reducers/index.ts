@@ -2,13 +2,16 @@ import { ActionReducerMap, createSelector,  createFeatureSelector } from '@ngrx/
 
 import { CoursesState } from '../../../shared/interfaces';
 import * as fromCourses from './course.reducer';
+import * as fromAuth from './auth.reducer';
 
 export interface ProductState {
   coursesState: CoursesState;
+  auth: fromAuth.AuthState; 
 }
 // resgistering the reducers of the appliaction
 export const reducers: ActionReducerMap<ProductState> = {
   coursesState: fromCourses.courseReducer,
+  auth: fromAuth.reducer
 };
 
 export const getProductState = createFeatureSelector<ProductState>('courses');

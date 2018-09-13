@@ -16,7 +16,7 @@ export class CourseService {
   private http: HttpClient;
   private baseUrl: string = BASE_URL;
   public state: string;
-  public courseSubject: ReplaySubject<Array<CourseData>> = new ReplaySubject();
+  public courseSubject: ReplaySubject<string> = new ReplaySubject();
 
   constructor (
     http: HttpClient,
@@ -41,16 +41,28 @@ export class CourseService {
     );
   }
 
-  public removeItem(id: number): Promise<any> {
-    return this.http.delete(`${this.baseUrl}/courses/${id}`).toPromise();
+  public removeItem(id: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/courses/${id}`);
   }
 
-  public serverCourseSearch(query: string): void {
-    const urlParams: HttpParams = new HttpParams().set('name_like', query);
-    this.http.get(`${this.baseUrl}/courses/courses/courses`, {params: urlParams})
-        .subscribe((data: CourseData[]) => {
-          this.courseSubject.next(data);
-        });
+  public onSearchAction(query: string): void {
+    this.courseSubject.next(query);
+  }
+
+  public serverCourseSearch(query: string): Observable<any> {
+    const urlParams: HttpParams = new HttpParams().set('name_like', query);    
+    return this.http.get(`${this.baseUrl}/courses/courses/courses`, {params: urlParams}).pipe(
+      map((courses: CourseData[]) => {        
+        return courses.map(element => new Course(
+          element.id,
+          element.name,
+          element.date,
+          element.length,
+          element.description,
+          element.isTopRated));
+      }),
+      catchError(error => of(error))
+    );
   }
 
   public getSpecificCourse(id: string): Observable<{}> {

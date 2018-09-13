@@ -19,6 +19,7 @@ export function courseReducer(
     case CourseActions.LOAD: {
       return {
         ...state,
+        loaded: false,
         loading: true
       };
     }
@@ -38,13 +39,50 @@ export function courseReducer(
         loaded: false
       };
     }
-    // case CourseActions.GET_COURSE: {
-    //   return {
-    //     ...state,
-    //   };
-    // }
-    // case CourseActions.GET_COURSES:
-    // return {...state, courses: [...action.payload]};
+    case CourseActions.DELETE: {
+      return {
+        ...state,
+        loaded: false,
+        loading: true
+      };
+    }
+    case CourseActions.DELETE_FAIL: {
+      return {
+        ...state,
+        loading: false,
+        loaded: false
+      };
+    }
+    case CourseActions.DELETE_SUCCESS: {
+      return {
+        ...state,
+        loaded: true,
+        loading: false,
+      };
+    }
+    case CourseActions.SEARCH: {
+      return {
+        ...state,
+        loaded: false,
+        loading: true
+      };
+    }
+    case CourseActions.SEARCH_SUCCESS: {
+      const courses: CourseItem[] = action.payload;
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+        courses
+      };
+    }
+    case CourseActions.SEARCH_FAIL: {
+      return {
+        ...state,
+        loaded: false,
+        loading: false
+      };
+    }
     default:
     return state;
   }
