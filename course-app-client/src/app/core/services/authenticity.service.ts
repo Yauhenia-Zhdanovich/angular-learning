@@ -6,10 +6,9 @@ import { ReplaySubject } from 'rxjs';
 import { Observable } from 'rxjs';
 
 import { LocalStorageService } from './local-storage.service';
-import { Credentials } from '../../shared/interfaces/credentials';
+import { Credentials, User } from '../../shared/interfaces';
 import { BASE_URL } from '../../shared/constants/path-config';
 import { ROUTES_CONFIG } from '../../../../app-config/routes/routes.config';
-import { User } from '../../shared/interfaces/user.interface';
 
 @Injectable()
 export class AuthService {
@@ -34,24 +33,26 @@ export class AuthService {
     return !!token;
   }
 
-  public logIn({login, password }: Credentials): void {
-    let token: string;
+  public logIn({login, password }: Credentials): Observable<any> {
     const urlParams: HttpParams = new HttpParams().set('login', login).set('password', password);
-    this.http.request('GET', `${this.baseUrl}/users`, { params: urlParams })
-      .subscribe((data: User[]) => {
-        if (data.length) {
-          token = data[0].fakeToken;
-          this.localStorageService.storeToken(token);
-          this.router.navigate([ROUTES_CONFIG.homeAbsolutePath]);
-          this.isAuthenticatedSubject.next(true);
-        } else {
-          this.isAuthenticatedSubject.next(false);
-        }
-      });
+    return this.http.request('GET', `${this.baseUrl}/users`, { params: urlParams });
+  }
+
+  public storeAndNavigate(data: User[]): void {
+    let token: string;
+    if (data.length) {
+        token = data[0].fakeToken;
+        this.localStorageService.storeToken(token);
+        this.router.navigate([ROUTES_CONFIG.homeAbsolutePath]);
+        this.isAuthenticatedSubject.next(true);
+      } else {
+        this.isAuthenticatedSubject.next(false);
+      }
   }
 
   public logOut(): void {
     this.localStorageService.wipeToken();
+    this.router.navigate([ROUTES_CONFIG.loginAbsolutePath]);
   }
 
   public getUserInfo(): Observable<any> {

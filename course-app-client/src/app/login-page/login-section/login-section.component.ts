@@ -5,8 +5,12 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { Store } from '@ngrx/store';
+import { AppState } from '../../app.state';
+import * as fromStore from '../../core/store';
+
 import { AuthService } from '../../core/services/authenticity.service';
-import { Credentials } from '../../shared/interfaces/credentials';
+import { Credentials } from '../../shared/interfaces';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -17,15 +21,19 @@ import { Subscription } from 'rxjs';
 export class LoginSectionComponent implements OnInit, OnDestroy {
   private formBuilder: FormBuilder;
   private authServiceSub: Subscription;
+  private store: Store<AppState>;
+
   public authForm: FormGroup;
   public authService: AuthService;
   public didAuthFailed: boolean = false;
 
   constructor(
     authService: AuthService,
-    formBuilder: FormBuilder
+    formBuilder: FormBuilder,
+    store: Store<AppState>
   ) {
     this.authService = authService;
+    this.store = store;
     this.formBuilder = formBuilder;
     this.createForm();
   }
@@ -48,7 +56,7 @@ export class LoginSectionComponent implements OnInit, OnDestroy {
 
   public logIn(): void {
     const cred: Credentials = this.authForm.value;
-    this.authService.logIn(cred);
+    this.store.dispatch(new fromStore.LoadAuthor(cred));
   }
 
   public ngOnDestroy(): void {

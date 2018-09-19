@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { CourseItem } from '../../shared/interfaces/course.interface';
+import { CourseItem } from '../../shared/interfaces';
 import { ROUTES_CONFIG } from '../../../../app-config/routes/routes.config';
 
 @Component({
